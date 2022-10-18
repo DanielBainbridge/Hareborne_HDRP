@@ -774,6 +774,15 @@ MonoBehaviour:
   m_leftGrapple: {fileID: 8543752001713745442}
   m_rightGrapple: {fileID: 8543752002030951095}
   m_camera: {fileID: 0}
+  m_playerControls:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 98ebff6d-2d05-4fdd-81ca-e5a4d29c72ab
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &2433740523331830714
 GameObject:
   m_ObjectHideFlags: 0
