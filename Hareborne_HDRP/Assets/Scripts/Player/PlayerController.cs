@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         m_leftFire.canceled += StopLeftHook;
         m_rightFire.performed += FireRightHook;
         m_rightFire.canceled += StopRightHook;
-        m_cameraMovement.performed += 
+        m_cameraMovement.performed += MoveCamera;
     }
     private void OnDisable()
     {
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCamera(InputAction.CallbackContext obj)
     {
-        //needs a vector 2
-        m_cameraDolly.MoveCamera();
+        Vector2 input = m_cameraMovement.ReadValue<Vector2>().normalized;
+        m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
     }
 }
