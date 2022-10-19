@@ -12,7 +12,6 @@ public class CameraDolly : MonoBehaviour
     private Vector3 m_targetPosition, m_previousTargetPosition;
     private Vector2 m_orbitAngles = new Vector2(45f, 0f);
     private Camera m_camera;
-    private PlayerController m_player;
 
     [Header("Variables To Change:")]
     public float m_cameraSensitivity = 90f;
@@ -21,7 +20,7 @@ public class CameraDolly : MonoBehaviour
     public float m_focusRadius = 1f;
     [SerializeField, Range(0f, 1f)]
     public float m_focusCentering = 0.5f;
-    [SerializeField, Range(-89f, 89)]
+    [SerializeField, Range(-89f, 89f)]
     public float m_minVerticalAngle = -75f, m_maxVerticalAngle = 75f;
     [SerializeField, Min(0f)]
     public bool m_autoAlign = true;
@@ -29,7 +28,7 @@ public class CameraDolly : MonoBehaviour
     [SerializeField, Range(0f, 90f)]
     public float alignSmoothRange = 45f;
 
-
+    private Quaternion m_lookRotation;
     private float m_lastManualRotationTime;
     public float m_cameraDistance = 12;
 
@@ -42,8 +41,6 @@ public class CameraDolly : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(m_orbitAngles);
         m_camera.fieldOfView = m_cameraPOV;
-
-        m_player = FindObjectOfType<PlayerController>();
     }
     private void OnValidate()
     {
@@ -55,21 +52,7 @@ public class CameraDolly : MonoBehaviour
     private void LateUpdate()
     {
         UpdateCameraTarget();
-        Quaternion lookRotation;
-        bool autoRotate = false;
-        if (m_autoAlign)
-        {
-            autoRotate = AutomaticRotation();
-        }
-        if (ManualRotation() || autoRotate)
-        {
-            ClampAngles();
-            lookRotation = Quaternion.Euler(m_orbitAngles);
-        }
-        else
-            lookRotation = transform.localRotation;
-
-        Vector3 lookDirection = lookRotation * Vector3.forward;
+        Vector3 lookDirection = m_lookRotation * Vector3.forward;
         transform.localPosition = m_targetPosition;
         Vector3 lookPosition = (m_targetPosition - lookDirection * m_cameraDistance);
         
@@ -83,15 +66,13 @@ public class CameraDolly : MonoBehaviour
         float castDistance = castLine.magnitude;
         Vector3 castDirection = castLine / castDistance;
 
-
-
         //check for collision behind camera
-        if (Physics.BoxCast(castFrom, CameraHalfExtents, castDirection, out RaycastHit hit, lookRotation, castDistance))
+        if (Physics.BoxCast(castFrom, CameraHalfExtents, castDirection, out RaycastHit hit, m_lookRotation, castDistance))
         {
             rectPosition = castFrom + castDirection * hit.distance;
             lookPosition = rectPosition - rectOffset;
         }
-        transform.SetPositionAndRotation(lookPosition, lookRotation);
+        transform.SetPositionAndRotation(lookPosition, m_lookRotation);
     }
 
     private void UpdateCameraTarget()
@@ -112,9 +93,8 @@ public class CameraDolly : MonoBehaviour
             m_targetPosition = m_cameraTarget.position;
     }
 
-    private bool ManualRotation()
-    {
-        Vector2 input = new Vector2(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"));
+    private bool ManualRotation(Vector2 input)
+    {        
         const float e = 0.001f;
         if (input.x < -e || input.x > e || input.y < -e | input.y > e)
         {
@@ -165,5 +145,20 @@ public class CameraDolly : MonoBehaviour
             halfextents.z = 0f;
             return halfextents;
         }
+    }
+    public void MoveCamera(Vector2 moveCoordinates)
+    {
+        bool autoRotate = false;
+        if (m_autoAlign)
+        {
+            autoRotate = AutomaticRotation();
+        }
+        if (ManualRotation(moveCoordinates) || autoRotate)
+        {
+            ClampAngles();
+            m_lookRotation = Quaternion.Euler(m_orbitAngles);
+        }
+        else
+            m_lookRotation = transform.localRotation;
     }
 }
