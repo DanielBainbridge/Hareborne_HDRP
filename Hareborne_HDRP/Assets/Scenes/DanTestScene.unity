@@ -444,6 +444,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 241680611}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 975456fd19fdbef43befddce52dc3a0f, type: 3}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_Id
       value: c3893c2b-3c3a-4905-848b-bc46c323236d
       objectReference: {fileID: 0}
@@ -453,23 +457,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.size
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[0].m_Id
-      value: 8bfed933-e8da-4f01-ae15-7227a9d960c5
+      value: 5ed2114f-5326-44ef-ae9f-8065dabedf77
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[1].m_Id
-      value: af409dc0-1fe9-4ca6-a323-1a9e718294fc
+      value: b5dd4629-75d0-4d1d-8341-65c52336ba81
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[2].m_Id
-      value: c3a10b87-825e-4eef-9b00-8b26492d5f41
+      value: 89e3f3e9-b4d5-4a9e-8c62-e75f81d39a6e
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[3].m_Id
-      value: c3a10b87-825e-4eef-9b00-8b26492d5f41
+      value: fb4aab30-a0d7-4bed-baa1-3aa5be052b81
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[4].m_Id
+      value: 0fa021f3-ed6f-4e88-9d59-c36d7add2377
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[5].m_Id
+      value: 6bcd763c-55d7-46a3-ae9c-e4d5c2f7a4e5
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[0].m_Name
@@ -485,15 +497,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[1].m_Path
-      value: 
+      value: <Mouse>/leftButton
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[2].m_Name
       value: positive
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[2].m_Path
+      value: <Mouse>/leftButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[3].m_Name
+      value: FireRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[3].m_Path
+      value: 1DAxis
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[4].m_Name
+      value: negative
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[4].m_Path
+      value: <Mouse>/rightButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[5].m_Name
       value: positive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[5].m_Path
+      value: <Mouse>/rightButton
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[0].m_Flags
@@ -509,6 +545,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[3].m_Flags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[4].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[5].m_Flags
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
@@ -525,6 +569,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[3].m_Action
+      value: Player Controls
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[4].m_Action
+      value: Player Controls
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[5].m_Action
       value: Player Controls
       objectReference: {fileID: 0}
     m_RemovedComponents: []
