@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: m_cameraTarget
       value: 
       objectReference: {fileID: 693882837}
+    - target: {fileID: 2452506013326315818, guid: 6d50b828286e87a4694436fdfe3214cd, type: 3}
+      propertyPath: m_cameraSensitivity
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 5096262571584922850, guid: 6d50b828286e87a4694436fdfe3214cd, type: 3}
       propertyPath: m_Name
       value: CameraDolly
@@ -578,6 +582,10 @@ PrefabInstance:
     - target: {fileID: 1915585356808042973, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
       propertyPath: m_playerControls.m_SingletonActionBindings.Array.data[5].m_Action
       value: Player Controls
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915585356808042974, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}
+      propertyPath: m_Center.y
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dc12dc115a43c74ba10732ae0d0cc15, type: 3}

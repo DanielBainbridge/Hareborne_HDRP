@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCamera(InputAction.CallbackContext obj)
     {
-        Vector2 input = m_cameraMovement.ReadValue<Vector2>().normalized;
+        Vector2 input = m_cameraMovement.ReadValue<Vector2>();
         m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
     }
 }
