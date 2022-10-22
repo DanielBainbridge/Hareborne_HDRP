@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3729650019623218683}
   - component: {fileID: 1452014674567190833}
   - component: {fileID: -6512980779752132922}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building2-FBX-001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
