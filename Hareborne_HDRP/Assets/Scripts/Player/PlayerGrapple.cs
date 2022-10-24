@@ -3,24 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer)), RequireComponent(typeof(RopeAnimation))]
 public class PlayerGrapple : MonoBehaviour
 {
+    //make all hidden in inspector, edit inside of player
+
     private Vector3 m_grapplePoint;
     [HideInInspector]
     public Vector3 m_currentGrapplePosition;
     private SpringJoint m_springJoint;
+    [HideInInspector]
     public LayerMask m_grappleableObjects;
+    [HideInInspector]
     public Transform m_hookOrigin, m_player;
     [HideInInspector]
     public Transform m_camera;
+    [HideInInspector]
     public float m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_hookRigidness, m_hookPullSlow, m_massScale;
-    [Range(0.0f, 1.0f)][Tooltip("The Higher this number the stronger the initial pull")]
+    [HideInInspector]
     public float m_initialPull;
-//add hang time
+    //add hang time
 
     void Start()
     {
-        m_camera = m_player.GetComponent<PlayerController>().m_camera;
     }
     public void StartGrapple()
     {
@@ -36,23 +41,22 @@ public class PlayerGrapple : MonoBehaviour
 
             // Spring creation
             float distanceFromPoint = Vector3.Distance(m_player.position, m_grapplePoint);
-            
+
             m_springJoint.maxDistance = distanceFromPoint * 0.25f;
             m_springJoint.minDistance = 0f;
-            //m_springJoint.breakTorque = 90;
-            m_player.GetComponent<Rigidbody>().AddForce((m_grapplePoint - m_player.position) * m_initialPull, ForceMode.Impulse);
+            m_player.GetComponent<Rigidbody>().AddForce((m_grapplePoint - m_player.position).normalized * m_initialPull * 10, ForceMode.Impulse);
 
 
             m_springJoint.spring = m_hookRigidness;
             m_springJoint.damper = m_hookPullSlow;
             m_springJoint.massScale = m_massScale;
         }
-    }    
+    }
     public void StopGrapple()
     {
         Destroy(m_springJoint);
     }
-    
+
     public bool IsGrappling()
     {
         return m_springJoint != null;
