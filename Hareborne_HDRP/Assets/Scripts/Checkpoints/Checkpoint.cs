@@ -60,6 +60,8 @@ public class Checkpoint : MonoBehaviour
                 }
                 //load win screen scene
                 m_timer.StopTimer();
+                m_parentSystem.LevelFinished();
+                //TODO Retain the time between Scene Transitions
             }
         }
     }

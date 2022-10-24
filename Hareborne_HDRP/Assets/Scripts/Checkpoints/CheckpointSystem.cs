@@ -17,6 +17,7 @@ public class CheckpointSystem : MonoBehaviour
     public Timer m_timer;
     [HideInInspector]
     public int m_currentTriggeredCheckpoint = 0;
+    private LevelLoader m_levelLoader;
     /// <summary>
     /// Set a reference to the player from within the scene
     /// </summary>
@@ -42,6 +43,15 @@ public class CheckpointSystem : MonoBehaviour
         }
     }
 
+    public void LevelFinished()
+    {
+        //loads end win screen
+        m_levelLoader.LoadScene(1);
+    }
+
+    /// <summary>
+    /// These are Unity Editor tools to assist designers with editing the checkpoints inside of levels easily
+    /// </summary>
     public void CreateStart()
     {
         if (transform.childCount == 0 || transform.GetChild(0).gameObject.name != "Map Start")
