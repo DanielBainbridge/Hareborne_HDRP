@@ -15,27 +15,45 @@ public class CheckpointSystemEditor : Editor
         DrawDefaultInspector();
         CheckpointSystem thisObject = (CheckpointSystem)target;
 
+        GUILayout.Label("Level Creation Buttons", EditorStyles.boldLabel);        
+
+        if (GUILayout.Button("Create Level Start"))
+        {
+            thisObject.CreateStart();
+        }
+        if (GUILayout.Button("Create Level End"))
+        {
+            thisObject.CreateEnd();
+        }
         if (GUILayout.Button("Create New Checkpoint"))
         {
-            if (thisObject.transform.childCount == 0)
-                thisObject.CreateStartEnd();
-            else
-                thisObject.CreateNewCheckpoint();
+            thisObject.CreateNewCheckpoint();
         }
-        
+
+
+        GUILayout.Label("Level Removal Buttons", EditorStyles.boldLabel);
+        if (GUILayout.Button("Remove Level Start"))
+        {
+            thisObject.RemoveStart();
+        }
+        if (GUILayout.Button("Remove Level End"))
+        {
+            thisObject.RemoveEnd();
+        }
+
         if (GUILayout.Button("Remove Checkpoint From Start"))
         {
-           thisObject.RemoveCheckpointFromStart();
+            thisObject.RemoveCheckpointFromStart();
         }
-        
+
         if (GUILayout.Button("Remove Checkpoint From End"))
         {
-           thisObject.RemoveCheckpointFromEnd();
-        }        
-        
+            thisObject.RemoveCheckpointFromEnd();
+        }
+
         if (GUILayout.Button("Clear Checkpoints"))
         {
-           thisObject.ClearCheckpoints();
+            thisObject.ClearCheckpoints();
         }
     }
 }

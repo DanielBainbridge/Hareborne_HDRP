@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour
 {
     public PlayerGrapple m_leftGrapple, m_rightGrapple;
@@ -15,13 +16,30 @@ public class PlayerController : MonoBehaviour
     private InputActionAsset m_playerControls;
     private InputAction m_leftFire, m_rightFire, m_cameraMovement;
 
+    [Header("Grapple Hook Functional Variables")]
+    public LayerMask m_grappleableObjects;
+    public Transform m_leftHookOrigin, m_rightHookOrigin;
+    public float m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_hookRigidness, m_hookPullSlow, m_massScale;
+    [Range(0.0f, 1.0f)]
+    [Tooltip("The Higher this number the stronger the initial pull")]
+    public float m_initialPull;
+
+    [Header("Grapple Hook Visual Variables")]
+    public int m_ropeQuality;
+    public float m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight;
+    public AnimationCurve m_affectCurve;
+    public Material m_chainMaterial;
+
     // Start is called before the first frame update
-    void Start() 
+    void Start()
     {
         //set reference to camera
         m_cameraDolly = m_camera.GetComponent<CameraDolly>();
 
         //set values from to apply to grapples here... do it...
+        UpdateGrappleHookFunction(m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_hookRigidness, m_hookPullSlow,
+            m_massScale, m_grappleableObjects, m_initialPull, m_leftHookOrigin, m_rightHookOrigin);
+        UpdateGrappleHookVisual(m_ropeQuality, m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight, m_affectCurve, m_chainMaterial);
     }
     private void OnEnable()
     {
@@ -49,11 +67,11 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         //rotation of player
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, m_camera.eulerAngles.y, ref m_turnSmoothVelocity, m_rotationSmooth); 
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, m_camera.eulerAngles.y, ref m_turnSmoothVelocity, m_rotationSmooth);
         transform.rotation = Quaternion.Euler(0, angle, 0);
 
     }
-    
+
     public void SetRespawn(Vector3 location)
     {
         m_respawnLocation = location;
@@ -84,5 +102,38 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 input = m_cameraMovement.ReadValue<Vector2>();
         m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
+    }
+
+    //TODO these can be made to use a struct holding all information for grapplehooks
+    public void UpdateGrappleHookFunction(float maxRopeDistance, float minRopeDistance, float hookSpeed, float hookRigidness, float hookPullSlow,
+        float massScale, LayerMask grappleableObjects, float initialPull, Transform leftHookOrigin, Transform rightHookOrigin)
+    {
+        m_leftGrapple.m_maxRopeDistance = m_rightGrapple.m_maxRopeDistance = maxRopeDistance;
+        m_leftGrapple.m_minRopeDistance = m_rightGrapple.m_minRopeDistance = minRopeDistance;
+        m_leftGrapple.m_hookSpeed = m_rightGrapple.m_hookSpeed = hookSpeed;
+        m_leftGrapple.m_hookRigidness = m_rightGrapple.m_hookRigidness = hookRigidness;
+        m_leftGrapple.m_hookPullSlow = m_rightGrapple.m_hookPullSlow = hookPullSlow;
+        m_leftGrapple.m_massScale = m_rightGrapple.m_massScale = massScale;
+        m_leftGrapple.m_grappleableObjects = m_rightGrapple.m_grappleableObjects = grappleableObjects;
+        m_leftGrapple.m_initialPull = m_rightGrapple.m_initialPull = initialPull;
+        m_leftGrapple.m_player = m_rightGrapple.m_player = transform;
+        m_leftGrapple.m_camera = m_rightGrapple.m_camera = m_camera;
+        m_leftGrapple.m_hookOrigin = leftHookOrigin;
+        m_rightGrapple.m_hookOrigin = rightHookOrigin;
+    }
+    public void UpdateGrappleHookVisual(int ropeQuality, float damper, float strength, float velocity, float waveCount, float waveHeight, AnimationCurve affectCurve, Material chainMaterial)
+    {
+        RopeAnimation leftGrappleAnimation = m_leftGrapple.GetComponent<RopeAnimation>();
+        RopeAnimation rightGrappleAnimation = m_rightGrapple.GetComponent<RopeAnimation>();
+
+        leftGrappleAnimation.m_ropeQuality = rightGrappleAnimation.m_ropeQuality = ropeQuality;
+        leftGrappleAnimation.m_damper = rightGrappleAnimation.m_damper = damper;
+        leftGrappleAnimation.m_strength = rightGrappleAnimation.m_strength = strength;
+        leftGrappleAnimation.m_velocity = rightGrappleAnimation.m_velocity = velocity;
+        leftGrappleAnimation.m_waveCount = rightGrappleAnimation.m_waveCount = waveCount;
+        leftGrappleAnimation.m_waveHeight = rightGrappleAnimation.m_waveHeight = waveHeight;
+        leftGrappleAnimation.m_affectCurve = rightGrappleAnimation.m_affectCurve = affectCurve;
+        leftGrappleAnimation.m_lineRenderer.material = rightGrappleAnimation.m_lineRenderer.material = chainMaterial;
+
     }
 }

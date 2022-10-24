@@ -5,19 +5,26 @@ using UnityEngine;
 
 public class CheckpointSystem : MonoBehaviour
 {
-    public GameObject m_checkpointPrefab;
-    //[HideInInspector]
+    [Header("Checkpoint Prefabs")]
+    public Checkpoint m_checkpointPrefab;
+    public Checkpoint m_levelStartPrefab;
+    public Checkpoint m_levelEndPrefab;
+    [HideInInspector]
     public List<Checkpoint> m_checkpoints;
     [HideInInspector]
     public PlayerController m_player;
+    [HideInInspector]
     public Timer m_timer;
-
+    [HideInInspector]
+    public int m_currentTriggeredCheckpoint = 0;
     /// <summary>
     /// Set a reference to the player from within the scene
     /// </summary>
     void Start()
     {
-        m_player = GetComponentInParent<PlayerController>();
+        m_player = FindObjectOfType<PlayerController>();
+        m_timer = FindObjectOfType<Timer>();
+
         if (transform.childCount > 0)
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -28,39 +35,119 @@ public class CheckpointSystem : MonoBehaviour
             }
             //checkpoint game objects set to false except the first one
             transform.GetChild(0).GetComponent<Checkpoint>().m_triggered = true;
+
+            //*********************ADD OFFSET TO CHARACTER SPAWN IMPORTANT AS SOON AS YOU HAVE PLAYER SPAWN ASSET***************************
             m_player.transform.position = transform.GetChild(0).transform.position;
             m_player.transform.rotation = transform.GetChild(0).transform.rotation;
         }
     }
 
-    public void CreateStartEnd()
+    public void CreateStart()
     {
-        GameObject start = Instantiate(m_checkpointPrefab, transform);
-        start.name = "Map Start";
-
-        GameObject end = Instantiate(m_checkpointPrefab, transform);
-        end.name = "Map End";
+        if (transform.childCount == 0 || transform.GetChild(0).gameObject.name != "Map Start")
+        {
+            GameObject start = Instantiate(m_levelStartPrefab.gameObject, transform);
+            start.transform.Translate(new Vector3(0, 0, 20));
+            start.name = "Map Start";
+            start.transform.SetSiblingIndex(0);
+            return;
+        }
+        Debug.Log("The start already exists");
+    }
+    public void CreateEnd()
+    {
+        if (transform.childCount == 0 || transform.GetChild(transform.childCount - 1).gameObject.name != "Map End")
+        {
+            GameObject end = Instantiate(m_levelEndPrefab.gameObject, transform);
+            end.transform.Translate(new Vector3(0, 0, -20));
+            end.name = "Map End";
+            end.transform.SetSiblingIndex(transform.childCount - 1);
+            return;
+        }
+        Debug.Log("The end already exists");
     }
     public void CreateNewCheckpoint()
     {
-        GameObject nextCheckpoint = Instantiate(m_checkpointPrefab, transform);
+        if (transform.childCount < 2)
+        {
+            if (transform.childCount == 0 || transform.GetChild(0).gameObject.name != "Map Start")
+            {
+                //runs check twice but this is in the editor it is fine
+                CreateStart();
+                return;
+            }
+            else if (transform.GetChild(transform.childCount - 1).gameObject.name != "Map End")
+            {
+                //runs check twice but this is in the editor it is fine
+                CreateEnd();
+                return;
+            }
+        }
+        GameObject nextCheckpoint = Instantiate(m_checkpointPrefab.gameObject, transform);
         nextCheckpoint.name = "Checkpoint " + (transform.childCount - 2);
         nextCheckpoint.transform.SetSiblingIndex(transform.childCount - 2);
     }
+    public void RemoveStart()
+    {
+        if (transform.childCount > 0 && transform.GetChild(0).gameObject.name == "Map Start")
+        {
+            DestroyImmediate(transform.GetChild(0).gameObject);
+            return;
+        }
+        Debug.Log("Could not find a start to remove");
+    }
+    public void RemoveEnd()
+    {
+        if (transform.childCount > 0 && transform.GetChild(transform.childCount - 1).gameObject.name == "Map End")
+        {
+            DestroyImmediate(transform.GetChild(transform.childCount - 1).gameObject);
+            return;
+        }
+        Debug.Log("Could not find an end to remove");
+    }
     public void RemoveCheckpointFromStart()
     {
-        if (transform.childCount > 0)
+        if(transform.childCount > 0)
         {
-            DestroyImmediate(transform.GetChild(0));
-            transform.GetChild(0).gameObject.name = "Map Start";
+            if (transform.childCount == 2)
+            {
+                RemoveStart();
+            }
+            else if (transform.childCount == 1 && transform.GetChild(0).name == "Map End")
+            {
+                RemoveEnd();
+            }
+            else
+            {
+                DestroyImmediate(transform.GetChild(1).gameObject);
+                for (int i = 1; i < transform.childCount - 1; i++)
+                {
+                    transform.GetChild(i).name = "Checkpoint " + i;
+                }
+            }
         }
+        
     }
     public void RemoveCheckpointFromEnd()
     {
         if (transform.childCount > 0)
         {
-            DestroyImmediate(transform.GetChild(transform.childCount - 1).gameObject);
-            transform.GetChild(transform.childCount - 1).gameObject.name = "Map End";
+            if (transform.childCount == 2)
+            {
+                RemoveEnd();
+            }
+            else if (transform.childCount == 1 && transform.GetChild(0).name == "Map Start")
+            {
+                RemoveStart();
+            }
+            else
+            {
+                DestroyImmediate(transform.GetChild(transform.childCount - 2).gameObject);
+                for (int i = 1; i < transform.childCount - 1; i++)
+                {
+                    transform.GetChild(i).name = "Checkpoint " + i;
+                }
+            }
         }
     }
     public void ClearCheckpoints()
@@ -69,6 +156,5 @@ public class CheckpointSystem : MonoBehaviour
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
-        
     }
 }

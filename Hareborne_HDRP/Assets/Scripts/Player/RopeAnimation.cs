@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class RopeAnimation : MonoBehaviour
 {
-    private LineRenderer m_lineRenderer;
+    [HideInInspector]
+    public LineRenderer m_lineRenderer;
     private Spring m_spring;
+    [HideInInspector]
     public PlayerGrapple m_grappleHook;
+    [HideInInspector]
     public int m_ropeQuality;
+    [HideInInspector]
     public float m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight;
+    [HideInInspector]
     public AnimationCurve m_affectCurve;
 
     // Start is called before the first frame update
@@ -17,6 +22,7 @@ public class RopeAnimation : MonoBehaviour
     {
         // Defines Line Renderer and spring
         m_lineRenderer = GetComponent<LineRenderer>();
+        m_grappleHook = GetComponent<PlayerGrapple>();
         m_spring = new Spring();
         m_spring.SetTarget(0);
     }
