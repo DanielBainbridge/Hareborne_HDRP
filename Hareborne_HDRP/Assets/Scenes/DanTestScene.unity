@@ -401,7 +401,7 @@ PrefabInstance:
     - target: {fileID: 2452506013326315818, guid: 6d50b828286e87a4694436fdfe3214cd, type: 3}
       propertyPath: m_cameraTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2611958608642725144}
     - target: {fileID: 2452506013326315818, guid: 6d50b828286e87a4694436fdfe3214cd, type: 3}
       propertyPath: m_cameraDistance
       value: 3.5
@@ -859,6 +859,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69198dd9cc9aaab48851a85b1c1299f4, type: 3}
+--- !u!4 &2611958608642725144 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2227528617933006478, guid: 69198dd9cc9aaab48851a85b1c1299f4, type: 3}
+  m_PrefabInstance: {fileID: 2611958608642725143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7894528046673708781
 PrefabInstance:
   m_ObjectHideFlags: 0
