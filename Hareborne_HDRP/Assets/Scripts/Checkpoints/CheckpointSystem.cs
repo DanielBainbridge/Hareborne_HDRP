@@ -13,7 +13,7 @@ public class CheckpointSystem : MonoBehaviour
     public List<Checkpoint> m_checkpoints;
     [HideInInspector]
     public PlayerController m_player;
-    [HideInInspector]
+    [Header("Timer Prefab")]
     public Timer m_timer;
     [HideInInspector]
     public int m_currentTriggeredCheckpoint = 0;
@@ -24,8 +24,7 @@ public class CheckpointSystem : MonoBehaviour
     void Start()
     {
         m_player = FindObjectOfType<PlayerController>();
-        m_timer = FindObjectOfType<Timer>();
-
+        m_levelLoader = FindObjectOfType<LevelLoader>();
         if (transform.childCount > 0)
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -46,7 +45,7 @@ public class CheckpointSystem : MonoBehaviour
     public void LevelFinished()
     {
         //loads end win screen
-        m_levelLoader.LoadScene(1);
+        m_levelLoader.LoadScene(0);
     }
 
     /// <summary>

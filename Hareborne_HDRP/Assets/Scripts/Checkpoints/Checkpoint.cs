@@ -13,7 +13,7 @@ public class Checkpoint : MonoBehaviour
     [HideInInspector]
     public Timer m_timer;
     [Header("Particle Prefab")]
-    public ParticleSystem m_checkpointReachedParticle;
+    private ParticleSystem[] m_checkpointReachedParticle;
 
     /// <summary>
     /// Get the parent system for references to the player in the scene
@@ -22,8 +22,11 @@ public class Checkpoint : MonoBehaviour
     {
         m_parentSystem = GetComponentInParent<CheckpointSystem>();
         m_timer = m_parentSystem.m_timer;
-        if (m_checkpointReachedParticle)
-            m_checkpointReachedParticle.Pause();
+        m_checkpointReachedParticle = GetComponentsInChildren<ParticleSystem>();
+        foreach(ParticleSystem pS in m_checkpointReachedParticle)
+        {
+            pS.Pause();
+        }
     }
     /// <summary>
     /// If the player collides with the checkpoints trigger, set the players respawn location to the checkpoints transform,
@@ -38,17 +41,16 @@ public class Checkpoint : MonoBehaviour
             //set respawn and collects current time
             m_parentSystem.m_player.SetRespawn(transform.position);
             m_RecordedTime = m_timer.GetCurrentTime();
-            if (m_checkpointReachedParticle)
+            foreach (ParticleSystem pS in m_checkpointReachedParticle)
             {
-                m_checkpointReachedParticle.Play();
+                pS.Play();
             }
 
             int siblingIndex = transform.GetSiblingIndex();
 
             //change this to be the collision boxes/triggers
 
-            m_parentSystem.m_checkpoints[siblingIndex + 1].gameObject.SetActive(true);
-            gameObject.SetActive(false);
+            gameObject.GetComponent<Collider>().enabled = false;
 
             //check if all checkpoints in parent Checkpoint system are hit
             //note for later, change to system not storing bools for each checkpoint, (triggered checkpoint count in checkpoint system, better for memory, faster, also harder to break)
@@ -62,7 +64,10 @@ public class Checkpoint : MonoBehaviour
                 m_timer.StopTimer();
                 m_parentSystem.LevelFinished();
                 //TODO Retain the time between Scene Transitions
+
+                return;
             }
+            m_parentSystem.m_checkpoints[siblingIndex + 1].gameObject.SetActive(true);
         }
     }
 }
