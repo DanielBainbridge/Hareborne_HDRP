@@ -7,10 +7,10 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     float m_RecordedTime;
-    [HideInInspector]
-    public bool m_triggered = false;
+    //[HideInInspector]
+    public bool m_triggered;
     private CheckpointSystem m_parentSystem;
-    [HideInInspector]
+    //[HideInInspector]
     public Timer m_timer;
     [Header("Particle Prefab")]
     private ParticleSystem[] m_checkpointReachedParticle;
@@ -23,7 +23,7 @@ public class Checkpoint : MonoBehaviour
         m_parentSystem = GetComponentInParent<CheckpointSystem>();
         m_timer = m_parentSystem.m_timer;
         m_checkpointReachedParticle = GetComponentsInChildren<ParticleSystem>();
-        foreach(ParticleSystem pS in m_checkpointReachedParticle)
+        foreach (ParticleSystem pS in m_checkpointReachedParticle)
         {
             pS.Pause();
         }
@@ -51,23 +51,22 @@ public class Checkpoint : MonoBehaviour
             //change this to be the collision boxes/triggers
 
             gameObject.GetComponent<Collider>().enabled = false;
+            m_triggered = true;
 
             //check if all checkpoints in parent Checkpoint system are hit
             //note for later, change to system not storing bools for each checkpoint, (triggered checkpoint count in checkpoint system, better for memory, faster, also harder to break)
-            foreach (Checkpoint c in m_parentSystem.m_checkpoints)
+            
+            m_parentSystem.m_currentTriggeredCheckpoint += 1;
+            if (m_parentSystem.m_currentTriggeredCheckpoint == m_parentSystem.m_checkpoints.Count)
             {
-                if (!c.m_triggered)
-                {
-                    break;
-                }
                 //load win screen scene
                 m_timer.StopTimer();
                 m_parentSystem.LevelFinished();
-                //TODO Retain the time between Scene Transitions
-
                 return;
             }
-            m_parentSystem.m_checkpoints[siblingIndex + 1].gameObject.SetActive(true);
+            m_parentSystem.m_checkpoints[siblingIndex + 1].gameObject.GetComponent<Collider>().enabled = true;
+
+            //TODO Retain the time between Scene Transitions
         }
     }
 }

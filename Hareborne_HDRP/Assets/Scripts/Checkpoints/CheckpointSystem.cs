@@ -15,6 +15,7 @@ public class CheckpointSystem : MonoBehaviour
     public PlayerController m_player;
     [Header("Timer Prefab")]
     public Timer m_timer;
+    public int m_countDown = 3;
     [HideInInspector]
     public int m_currentTriggeredCheckpoint = 0;
     private LevelLoader m_levelLoader;
@@ -32,9 +33,10 @@ public class CheckpointSystem : MonoBehaviour
                 Checkpoint checkpointToAdd = transform.GetChild(i).GetComponent<Checkpoint>();
                 m_checkpoints.Add(checkpointToAdd);
                 checkpointToAdd.m_triggered = false;
+                checkpointToAdd.GetComponent<Collider>().enabled = false;
             }
             //checkpoint game objects set to false except the first one
-            transform.GetChild(0).GetComponent<Checkpoint>().m_triggered = true;
+            transform.GetChild(0).GetComponent<Collider>().enabled = true;
 
             //*********************ADD OFFSET TO CHARACTER SPAWN IMPORTANT AS SOON AS YOU HAVE PLAYER SPAWN ASSET***************************
             m_player.transform.position = transform.GetChild(0).transform.position;
@@ -165,5 +167,9 @@ public class CheckpointSystem : MonoBehaviour
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
+    }
+    private IEnumerator WaitSeconds(int secondsToWait)
+    {
+        yield return new WaitForSeconds((float)secondsToWait);
     }
 }
