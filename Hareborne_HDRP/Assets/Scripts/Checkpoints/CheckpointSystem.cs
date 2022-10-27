@@ -38,7 +38,6 @@ public class CheckpointSystem : MonoBehaviour
             //checkpoint game objects set to false except the first one
             transform.GetChild(0).GetComponent<Collider>().enabled = true;
 
-            //*********************ADD OFFSET TO CHARACTER SPAWN IMPORTANT AS SOON AS YOU HAVE PLAYER SPAWN ASSET***************************
             m_player.transform.position = transform.GetChild(0).transform.position;
             m_player.transform.rotation = transform.GetChild(0).transform.rotation;
         }
@@ -118,7 +117,7 @@ public class CheckpointSystem : MonoBehaviour
     }
     public void RemoveCheckpointFromStart()
     {
-        if(transform.childCount > 0)
+        if (transform.childCount > 0)
         {
             if (transform.childCount == 2)
             {
@@ -137,7 +136,7 @@ public class CheckpointSystem : MonoBehaviour
                 }
             }
         }
-        
+
     }
     public void RemoveCheckpointFromEnd()
     {
@@ -170,6 +169,6 @@ public class CheckpointSystem : MonoBehaviour
     }
     private IEnumerator WaitSeconds(int secondsToWait)
     {
-        yield return new WaitForSeconds((float)secondsToWait);
+        yield return new WaitForSeconds(secondsToWait);
     }
 }

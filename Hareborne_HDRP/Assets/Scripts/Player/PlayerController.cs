@@ -70,6 +70,10 @@ public class PlayerController : MonoBehaviour
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, m_camera.eulerAngles.y, ref m_turnSmoothVelocity, m_rotationSmooth);
         transform.rotation = Quaternion.Euler(0, angle, 0);
 
+        //respawn of character
+        if (transform.position.y <= 2)
+            RespawnCharacter();
+
     }
 
     public void SetRespawn(Vector3 location)

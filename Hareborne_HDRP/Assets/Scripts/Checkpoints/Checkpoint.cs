@@ -55,7 +55,7 @@ public class Checkpoint : MonoBehaviour
 
             //check if all checkpoints in parent Checkpoint system are hit
             //note for later, change to system not storing bools for each checkpoint, (triggered checkpoint count in checkpoint system, better for memory, faster, also harder to break)
-            
+
             m_parentSystem.m_currentTriggeredCheckpoint += 1;
             if (m_parentSystem.m_currentTriggeredCheckpoint == m_parentSystem.m_checkpoints.Count)
             {
