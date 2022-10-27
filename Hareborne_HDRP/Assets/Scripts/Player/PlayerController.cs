@@ -84,6 +84,8 @@ public class PlayerController : MonoBehaviour
     {
         transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
         transform.position = m_respawnLocation;
+        m_leftGrapple.StopGrapple();
+        m_rightGrapple.StopGrapple();
     }
     private void FireLeftHook(InputAction.CallbackContext obj)
     {
