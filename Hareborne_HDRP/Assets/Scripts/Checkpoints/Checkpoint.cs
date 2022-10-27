@@ -41,6 +41,8 @@ public class Checkpoint : MonoBehaviour
             //set respawn and collects current time
             m_parentSystem.m_player.SetRespawn(transform.position);
             m_RecordedTime = m_timer.GetCurrentTime();
+            if(m_parentSystem.m_currentTriggeredCheckpoint != 0)
+                m_timer.AddCheckpointTimeToUI();
             foreach (ParticleSystem pS in m_checkpointReachedParticle)
             {
                 pS.Play();

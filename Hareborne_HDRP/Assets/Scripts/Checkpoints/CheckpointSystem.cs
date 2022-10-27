@@ -57,7 +57,7 @@ public class CheckpointSystem : MonoBehaviour
         if (transform.childCount == 0 || transform.GetChild(0).gameObject.name != "Map Start")
         {
             GameObject start = Instantiate(m_levelStartPrefab.gameObject, transform);
-            start.transform.Translate(new Vector3(0, 0, 20));
+            start.transform.Translate(new Vector3(0, 0, -20));
             start.name = "Map Start";
             start.transform.SetSiblingIndex(0);
             return;
@@ -69,7 +69,7 @@ public class CheckpointSystem : MonoBehaviour
         if (transform.childCount == 0 || transform.GetChild(transform.childCount - 1).gameObject.name != "Map End")
         {
             GameObject end = Instantiate(m_levelEndPrefab.gameObject, transform);
-            end.transform.Translate(new Vector3(0, 0, -20));
+            end.transform.Translate(new Vector3(0, 0, 20));
             end.name = "Map End";
             end.transform.SetSiblingIndex(transform.childCount - 1);
             return;
