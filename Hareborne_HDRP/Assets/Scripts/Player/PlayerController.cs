@@ -76,6 +76,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            RespawnCharacter();
+        }
+    }
+
     public void SetRespawn(Vector3 location)
     {
         m_respawnLocation = location;
