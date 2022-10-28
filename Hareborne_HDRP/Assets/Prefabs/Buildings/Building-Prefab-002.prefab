@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7843684049339832757}
   - component: {fileID: 4903701229423452415}
   - component: {fileID: 8442217853172401259}
+  - component: {fileID: 3215060801068448782}
   m_Layer: 6
   m_Name: default
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3215060801068448782
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327561797117561486}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 18.545664, y: 91.1004, z: 35.264328}
+  m_Center: {x: -8.384212, y: 45.53196, z: 0.7655182}
 --- !u!1 &8061928818907099735
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +104,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7253725767765420269}
-  - component: {fileID: 4552449001588661653}
   m_Layer: 6
   m_Name: Building-Prefab-002
   m_TagString: Untagged
@@ -113,16 +126,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4552449001588661653
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8061928818907099735}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
