@@ -26,21 +26,29 @@ public class Timer : MonoBehaviour
         m_checkpointSystem = FindObjectOfType<CheckpointSystem>();
         m_countDown = m_checkpointSystem.m_countDown;
         m_timerText = this.GetComponent<Text>();
-        WaitSeconds(m_countDown);
-        StartTimer();
-        m_timerActive = true;
+        StartCoroutine(WaitSeconds(m_countDown));
+
 
         for (int i = 0; i < m_checkpointSystem.m_checkpoints.Count - 1; i++)
         {
-            float yOffset = m_lineSpace * i -60;
+            float yOffset = m_lineSpace * i - 60;
             Vector3 positionOffset = new Vector3(-3, -yOffset, 0);
             Image lineToAdd = Instantiate(m_linePrefab, transform.parent);
             lineToAdd.rectTransform.Translate(positionOffset);
-            if(i == 0)
+            if (i == 0)
             {
                 transform.position = lineToAdd.transform.position;
                 transform.Translate(new Vector3(0, 4, 0));
             }
+            Text checkpointNumber = Instantiate(m_textPrefab, transform.parent);
+            checkpointNumber.alignment = TextAnchor.MiddleLeft;
+            checkpointNumber.rectTransform.position = lineToAdd.transform.position + new Vector3(-m_containerImage.rectTransform.rect.width / 2.0f, 4, 0);
+            if (i + 1 != m_checkpointSystem.m_checkpoints.Count - 1)
+            {
+                checkpointNumber.text = "Checkpoint " + (i + 1);
+            }
+            else
+                checkpointNumber.text = "Finish";
         }
 
     }
@@ -65,6 +73,7 @@ public class Timer : MonoBehaviour
     public void StartTimer()
     {
         m_startTime = Time.time;
+        m_timerActive = true;
     }
     public void StopTimer()
     {
@@ -83,6 +92,7 @@ public class Timer : MonoBehaviour
     private IEnumerator WaitSeconds(int secondsToWait)
     {
         yield return new WaitForSeconds(secondsToWait);
+        StartTimer();
     }
 
 }

@@ -110,7 +110,7 @@ public class CameraDolly : MonoBehaviour
             return false;
         Vector2 movement = new Vector2(m_targetPosition.x - m_previousTargetPosition.x, m_targetPosition.y - m_previousTargetPosition.y);
         float movementDeltaSqr = movement.SqrMagnitude();
-        if (movementDeltaSqr < 0.0001f)
+        if (movementDeltaSqr < 0.00001f)
             return false;
         float headingAngle = GetAngle(movement / Mathf.Sqrt(movementDeltaSqr));
         float deltaAbs = Mathf.Abs(Mathf.DeltaAngle(m_orbitAngles.y, headingAngle));

@@ -1,6 +1,5 @@
 //Authored By Daniel Bainbridge
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,6 +29,11 @@ public class PlayerController : MonoBehaviour
     public AnimationCurve m_affectCurve;
     public Material m_chainMaterial;
 
+    [Header("IK Targets")]
+    public Transform m_leftArmTarget;
+    public Transform m_rightArmTarget;
+    private Vector3 m_leftArmTargetOriginalPos, m_rightArmTargetOriginalPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +44,9 @@ public class PlayerController : MonoBehaviour
         UpdateGrappleHookFunction(m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_hookRigidness, m_hookPullSlow,
             m_massScale, m_grappleableObjects, m_initialPull, m_leftHookOrigin, m_rightHookOrigin);
         UpdateGrappleHookVisual(m_ropeQuality, m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight, m_affectCurve, m_chainMaterial);
+        DisableForSeconds(3);
+        m_leftArmTargetOriginalPos = m_leftArmTarget.localPosition;
+        m_rightArmTargetOriginalPos = m_rightArmTarget.localPosition;        
     }
     private void OnEnable()
     {
@@ -74,12 +81,31 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y <= 2)
             RespawnCharacter();
 
+        if (m_rightGrapple.IsGrappling())
+        {
+            m_rightArmTarget.position = Vector3.Lerp(m_rightArmTarget.position, m_rightGrapple.m_currentGrapplePosition, 0.08f);
+            m_rightArmTarget.localPosition = new Vector3(Mathf.Clamp(m_rightArmTarget.position.x, 0, 50), m_rightArmTarget.localPosition.y, m_rightArmTarget.localPosition.z);
+        }
+        else
+            //TODO Change this to 0 when you get the new rig
+            m_rightArmTarget.localPosition = Vector3.Lerp(m_rightArmTarget.localPosition, m_rightArmTargetOriginalPos, 0.08f);
+
+        if (m_leftGrapple.IsGrappling())
+        {
+            m_leftArmTarget.position = Vector3.Lerp(m_leftArmTarget.position, m_leftGrapple.m_currentGrapplePosition, 0.08f);
+            m_leftArmTarget.localPosition = new Vector3(Mathf.Clamp(m_leftArmTarget.position.x, -50, 0), m_leftArmTarget.localPosition.y, m_leftArmTarget.localPosition.z);
+        }
+        else
+            //TODO Change this to 0 when you get the new rig
+            m_leftArmTarget.localPosition = Vector3.Lerp(m_leftArmTarget.localPosition, m_leftArmTargetOriginalPos, 0.08f);
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
+            Debug.Log("This hit an Obstacle");
             RespawnCharacter();
         }
     }
@@ -149,5 +175,12 @@ public class PlayerController : MonoBehaviour
         leftGrappleAnimation.m_affectCurve = rightGrappleAnimation.m_affectCurve = affectCurve;
         leftGrappleAnimation.m_lineRenderer.material = rightGrappleAnimation.m_lineRenderer.material = chainMaterial;
 
+    }
+
+    private IEnumerator DisableForSeconds(int secondsToWait)
+    {
+        OnDisable();
+        yield return new WaitForSeconds(secondsToWait);
+        OnEnable();
     }
 }
