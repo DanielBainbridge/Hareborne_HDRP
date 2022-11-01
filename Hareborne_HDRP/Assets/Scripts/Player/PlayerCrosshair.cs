@@ -26,6 +26,9 @@ public class PlayerCrosshair : MonoBehaviour
             //change crosshair colour
             m_crosshair.color = m_grapplePossibleColour;
         }
-        else m_crosshair.color = grappleNotPossibleColour;
+        else
+        {
+            m_crosshair.color = grappleNotPossibleColour;
+        }
     }
 }
