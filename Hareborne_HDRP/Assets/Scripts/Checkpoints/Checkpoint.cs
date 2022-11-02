@@ -39,7 +39,7 @@ public class Checkpoint : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>())
         {
             //set respawn and collects current time
-            m_parentSystem.m_player.SetRespawn(transform.position);
+            m_parentSystem.m_player.SetRespawn(transform.position, transform.rotation);
             m_RecordedTime = m_timer.GetCurrentTime();
             if(m_parentSystem.m_currentTriggeredCheckpoint != 0)
                 m_timer.AddCheckpointTimeToUI();

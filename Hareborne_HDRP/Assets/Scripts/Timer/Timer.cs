@@ -38,11 +38,10 @@ public class Timer : MonoBehaviour
             if (i == 0)
             {
                 transform.position = lineToAdd.transform.position;
-                transform.Translate(new Vector3(0, 4, 0));
             }
             Text checkpointNumber = Instantiate(m_textPrefab, transform.parent);
             checkpointNumber.alignment = TextAnchor.MiddleLeft;
-            checkpointNumber.rectTransform.position = lineToAdd.transform.position + new Vector3(-m_containerImage.rectTransform.rect.width / 2.0f, 4, 0);
+            checkpointNumber.rectTransform.position = lineToAdd.transform.position + new Vector3(-m_containerImage.rectTransform.rect.width / 30f, 0, 0);
             if (i + 1 != m_checkpointSystem.m_checkpoints.Count - 1)
             {
                 checkpointNumber.text = "Checkpoint " + (i + 1);
@@ -82,7 +81,7 @@ public class Timer : MonoBehaviour
     public void AddCheckpointTimeToUI()
     {
         Text checkpointTime = Instantiate(m_textPrefab, transform.parent);
-        checkpointTime.transform.position = transform.position;
+        checkpointTime.transform.position = transform.position + new Vector3(m_containerImage.rectTransform.rect.width / 30f,0,0);
         float currentTime = GetCurrentTime();
         string minutes = ((int)currentTime / 60).ToString();
         string seconds = (currentTime % 60).ToString("f2");
