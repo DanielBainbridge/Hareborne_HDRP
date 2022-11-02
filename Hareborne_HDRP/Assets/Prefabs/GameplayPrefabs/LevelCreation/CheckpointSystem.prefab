@@ -43,10 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2d8f91da3b1f64faddacf68832d563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_checkpointPrefab: {fileID: 33980500263063927, guid: 1ee6cfac821a4354b933489c90ae0b35, type: 3}
-  m_levelStartPrefab: {fileID: 326065088329477612, guid: 9ee26e5bcc5a8db4588465a62fb37a3d, type: 3}
+  m_checkpointPrefab: {fileID: 5674529395779673586, guid: d5fc68388a8cd1e4fb720b8282575393, type: 3}
+  m_levelStartPrefab: {fileID: 2685466247927756213, guid: 594f8e1a1c1a302458cd19b841694adf, type: 3}
   m_levelEndPrefab: {fileID: 1257888736225839823, guid: 759610c68ac710345bd701a87a4578c2, type: 3}
   m_checkpoints: []
   m_player: {fileID: 0}
   m_timer: {fileID: 0}
+  m_countDown: 3
   m_currentTriggeredCheckpoint: 0
