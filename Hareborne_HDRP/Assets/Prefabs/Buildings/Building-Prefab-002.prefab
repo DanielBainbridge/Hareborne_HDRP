@@ -3013,13 +3013,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7253725767765420269}
     m_Modifications:
+    - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
+      propertyPath: m_Intensity
+      value: 16623306
+      objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.89
+      value: 0.7013815
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3061,6 +3065,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Point Light
       objectReference: {fileID: 0}
+    - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
+      propertyPath: m_Intensity
+      value: 1e+9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
 --- !u!4 &1242368055081209760 stripped
@@ -3077,7 +3085,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 166233.06
+      value: 16623306
       objectReference: {fileID: 0}
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Lightmapping
@@ -3097,7 +3105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.89
+      value: 0.7013815
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3145,7 +3153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 10000000
+      value: 1e+9
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_PointlightHDType
@@ -3167,7 +3175,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 12732395
+      value: 16623306
       objectReference: {fileID: 0}
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Lightmapping
@@ -3191,7 +3199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.88861847
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3239,7 +3247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 10000000
+      value: 1e+9
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_PointlightHDType
@@ -3261,7 +3269,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 12732395
+      value: 16623306
       objectReference: {fileID: 0}
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Lightmapping
@@ -3285,7 +3293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.88861847
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3333,7 +3341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 10000000
+      value: 1e+9
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_PointlightHDType
@@ -3355,7 +3363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 166233.06
+      value: 16623306
       objectReference: {fileID: 0}
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Lightmapping
@@ -3375,7 +3383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.89
+      value: 0.7013815
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3423,7 +3431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 10000000
+      value: 1e+9
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_PointlightHDType
@@ -3445,7 +3453,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 166233.06
+      value: 16623306
       objectReference: {fileID: 0}
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Lightmapping
@@ -3465,7 +3473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.89
+      value: 0.7013815
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3513,7 +3521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 10000000
+      value: 1e+9
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_PointlightHDType
@@ -3535,7 +3543,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 12732395
+      value: 16623306
       objectReference: {fileID: 0}
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Lightmapping
@@ -3559,7 +3567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.88861847
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3607,7 +3615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 10000000
+      value: 1e+9
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_PointlightHDType
@@ -3629,7 +3637,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 166233.06
+      value: 16623306
       objectReference: {fileID: 0}
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Lightmapping
@@ -3649,7 +3657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.89
+      value: 0.7013815
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3697,7 +3705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 10000000
+      value: 1e+9
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_PointlightHDType
@@ -3719,7 +3727,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 166233.06
+      value: 16623306
       objectReference: {fileID: 0}
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Lightmapping
@@ -3739,7 +3747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.89
+      value: 0.7013815
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3787,7 +3795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 10000000
+      value: 1e+9
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_PointlightHDType
@@ -3809,7 +3817,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 12732395
+      value: 16623306
       objectReference: {fileID: 0}
     - target: {fileID: 1213864262307360207, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Lightmapping
@@ -3833,7 +3841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.89
+      value: 0.7013815
       objectReference: {fileID: 0}
     - target: {fileID: 1396434177589493510, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3881,7 +3889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_Intensity
-      value: 10000000
+      value: 1e+9
       objectReference: {fileID: 0}
     - target: {fileID: 6002049186446210483, guid: 6aaf69dc23f0dd04c983329847e1f2ca, type: 3}
       propertyPath: m_PointlightHDType
