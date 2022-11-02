@@ -10,7 +10,10 @@ public class PlayerController : MonoBehaviour
     private float m_rotationSmooth = 0.1f, m_turnSmoothVelocity;
     public Transform m_camera;
     private CameraDolly m_cameraDolly;
+
+    //respawn
     private Vector3 m_respawnLocation;
+    private Quaternion m_respawnRotation;
     [SerializeField]
     private InputActionAsset m_playerControls;
     private InputAction m_leftFire, m_rightFire, m_cameraMovement;
@@ -46,7 +49,7 @@ public class PlayerController : MonoBehaviour
         UpdateGrappleHookVisual(m_ropeQuality, m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight, m_affectCurve, m_chainMaterial);
         DisableForSeconds(3);
         m_leftArmTargetOriginalPos = m_leftArmTarget.localPosition;
-        m_rightArmTargetOriginalPos = m_rightArmTarget.localPosition;        
+        m_rightArmTargetOriginalPos = m_rightArmTarget.localPosition;
     }
     private void OnEnable()
     {
@@ -60,7 +63,6 @@ public class PlayerController : MonoBehaviour
         m_leftFire.canceled += StopLeftHook;
         m_rightFire.performed += FireRightHook;
         m_rightFire.canceled += StopRightHook;
-        m_cameraMovement.performed += MoveCamera;
     }
     private void OnDisable()
     {
@@ -80,6 +82,11 @@ public class PlayerController : MonoBehaviour
         //respawn of character
         if (transform.position.y <= 2)
             RespawnCharacter();
+
+
+
+
+        // IK restraints on arms
 
         if (m_rightGrapple.IsGrappling())
         {
@@ -110,16 +117,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetRespawn(Vector3 location)
+    public void SetRespawn(Vector3 location, Quaternion rotation)
     {
         m_respawnLocation = location;
+        m_respawnRotation = rotation;
     }
     public void RespawnCharacter()
     {
         transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        transform.position = m_respawnLocation;
+        transform.SetPositionAndRotation(m_respawnLocation, m_respawnRotation);
         m_leftGrapple.StopGrapple();
         m_rightGrapple.StopGrapple();
+        m_cameraDolly.SetLookRotation(m_respawnRotation);
     }
     private void FireLeftHook(InputAction.CallbackContext obj)
     {
@@ -138,9 +147,10 @@ public class PlayerController : MonoBehaviour
         m_rightGrapple.StopGrapple();
     }
 
-    private void MoveCamera(InputAction.CallbackContext obj)
+    private void LateUpdate()
     {
         Vector2 input = m_cameraMovement.ReadValue<Vector2>();
+        input.Normalize();
         m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
     }
 

@@ -161,4 +161,30 @@ public class CameraDolly : MonoBehaviour
         else
             m_lookRotation = transform.localRotation;
     }
+    public void SetLookRotation(Quaternion lookRotation)
+    {
+        m_lookRotation = lookRotation;
+        Vector3 lookDirection = m_lookRotation * Vector3.forward;
+        transform.localPosition = m_targetPosition;
+        Vector3 lookPosition = (m_targetPosition - lookDirection * m_cameraDistance);
+
+
+
+        //calculations for boxcast to work with focus radius
+        Vector3 rectOffset = lookDirection * m_camera.nearClipPlane;
+        Vector3 rectPosition = lookPosition + rectOffset;
+        Vector3 castFrom = m_targetPosition;
+        Vector3 castLine = rectPosition - castFrom;
+        float castDistance = castLine.magnitude;
+        Vector3 castDirection = castLine / castDistance;
+
+        //check for collision behind camera
+        if (Physics.BoxCast(castFrom, CameraHalfExtents, castDirection, out RaycastHit hit, m_lookRotation, castDistance))
+        {
+            rectPosition = castFrom + castDirection * hit.distance;
+            lookPosition = rectPosition - rectOffset;
+        }
+
+        transform.SetPositionAndRotation(lookPosition, m_lookRotation);
+    }
 }
