@@ -46,7 +46,7 @@ public class CheckpointSystem : MonoBehaviour
     public void LevelFinished()
     {
         //loads end win screen
-        m_levelLoader.LoadScene(0);
+        m_levelLoader.LoadScene(1);
     }
 
     /// <summary>
