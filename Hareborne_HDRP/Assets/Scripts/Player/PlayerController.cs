@@ -37,8 +37,7 @@ public class PlayerController : MonoBehaviour
     public Transform m_rightArmTarget;
     private Vector3 m_leftArmTargetOriginalPos, m_rightArmTargetOriginalPos;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //set reference to camera
         m_cameraDolly = m_camera.GetComponent<CameraDolly>();
