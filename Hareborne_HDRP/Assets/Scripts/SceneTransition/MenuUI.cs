@@ -2,10 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuUI : MonoBehaviour
 {
     LevelLoader m_levelLoader;
+
+    [SerializeField] int m_deselectedFontSize = 40;
+    public void TextGreyColour([SerializeField] TMP_Text _btn_Text)
+    {
+        _btn_Text.color = Color.grey;
+        _btn_Text.fontSize = m_deselectedFontSize;
+    }
+
+    public void TextWhiteColour([SerializeField] TMP_Text _btn_Text)
+    {
+        _btn_Text.color = Color.white;
+        _btn_Text.fontSize = 50;
+    }
     // Start is called before the first frame update
     void Start()
     {

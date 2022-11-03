@@ -47,6 +47,9 @@ public class CheckpointSystem : MonoBehaviour
     {
         //loads end win screen
         m_levelLoader.LoadScene(1);
+        FindObjectOfType<PlayerCrosshair>().gameObject.SetActive(false);
+        StartCoroutine(MoveTimer());
+        Cursor.lockState = CursorLockMode.None;
     }
 
     /// <summary>
@@ -170,5 +173,10 @@ public class CheckpointSystem : MonoBehaviour
     private IEnumerator WaitSeconds(int secondsToWait)
     {
         yield return new WaitForSeconds(secondsToWait);
+    }
+    private IEnumerator MoveTimer()
+    {
+        yield return new WaitForSeconds(1);        
+        m_timer.transform.parent.transform.Translate(new Vector2(200, -100));
     }
 }

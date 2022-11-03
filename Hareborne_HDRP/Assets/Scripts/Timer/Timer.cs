@@ -52,6 +52,16 @@ public class Timer : MonoBehaviour
 
     }
 
+    private void Awake()
+    {
+        Timer[] timers = FindObjectsOfType<Timer>();
+        for (int i = 0; i < timers.Length; i++)
+        {
+            if (timers[i].gameObject != gameObject)
+                Destroy(timers[i].transform.parent.transform.parent.gameObject);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -81,7 +91,7 @@ public class Timer : MonoBehaviour
     public void AddCheckpointTimeToUI()
     {
         Text checkpointTime = Instantiate(m_textPrefab, transform.parent);
-        checkpointTime.transform.position = transform.position + new Vector3(m_containerImage.rectTransform.rect.width / 30f,0,0);
+        checkpointTime.transform.position = transform.position + new Vector3(m_containerImage.rectTransform.rect.width / 30f, 0, 0);
         float currentTime = GetCurrentTime();
         string minutes = ((int)currentTime / 60).ToString();
         string seconds = (currentTime % 60).ToString("f2");
