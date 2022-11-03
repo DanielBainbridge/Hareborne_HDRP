@@ -1,4 +1,4 @@
-// Author Kim Talbot
+// Author Kim Talbot with noted ammendments by Daniel Bainbridge
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +25,6 @@ public class SettingsUI : MonoBehaviour
         List<string> options = new List<string>();
 
         int currentResolutionIndex = 0;
-        // Debug.Log(Screen.currentResolution);
 
         // loop through every element in our resolutions array
         for (int i = 0; i < resolutions.Length; i++)
