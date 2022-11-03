@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
     public Transform m_rightArmTarget;
     private Vector3 m_leftArmTargetOriginalPos, m_rightArmTargetOriginalPos;
 
+    [Header("Sounds")]
+    public AudioSource m_grappleShot;
+    public AudioSource m_grappleWithdraw, m_playerDeath;
+
     //Animator Controls
     private Animator m_animator;
     private enum GroundedState
@@ -77,6 +81,10 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         m_playerControls.Disable();
+        m_leftFire.performed -= FireLeftHook;
+        m_leftFire.canceled -= StopLeftHook;
+        m_rightFire.performed -= FireRightHook;
+        m_rightFire.canceled -= StopRightHook;
     }
 
     // Update is called once per frame
@@ -91,7 +99,10 @@ public class PlayerController : MonoBehaviour
 
         //respawn of character
         if (transform.position.y <= 2)
+        {
+            m_playerDeath.Play();
             RespawnCharacter();
+        }
 
         //check if the player is touching the ground
         if (Physics.Raycast(transform.position, Vector3.down, 0.05f))
@@ -165,17 +176,25 @@ public class PlayerController : MonoBehaviour
     private void FireLeftHook(InputAction.CallbackContext obj)
     {
         m_leftGrapple.StartGrapple();
+        if (m_leftGrapple.IsGrappling())
+            m_grappleShot.Play();
     }
     private void StopLeftHook(InputAction.CallbackContext obj)
     {
+        if (m_leftGrapple.IsGrappling())
+            m_grappleWithdraw.Play();
         m_leftGrapple.StopGrapple();
     }
     private void FireRightHook(InputAction.CallbackContext obj)
     {
         m_rightGrapple.StartGrapple();
+        if (m_rightGrapple.IsGrappling())
+            m_grappleShot.Play();
     }
     private void StopRightHook(InputAction.CallbackContext obj)
     {
+        if (m_rightGrapple.IsGrappling())
+            m_grappleWithdraw.Play();
         m_rightGrapple.StopGrapple();
     }
 

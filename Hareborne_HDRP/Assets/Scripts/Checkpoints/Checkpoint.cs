@@ -10,10 +10,11 @@ public class Checkpoint : MonoBehaviour
     //[HideInInspector]
     public bool m_triggered;
     private CheckpointSystem m_parentSystem;
-    //[HideInInspector]
+    [HideInInspector]
     public Timer m_timer;
     [Header("Particle Prefab")]
     private ParticleSystem[] m_checkpointReachedParticle;
+    public AudioSource m_checkpointSound;
 
     /// <summary>
     /// Get the parent system for references to the player in the scene
@@ -43,6 +44,10 @@ public class Checkpoint : MonoBehaviour
             m_RecordedTime = m_timer.GetCurrentTime();
             if(m_parentSystem.m_currentTriggeredCheckpoint != 0)
                 m_timer.AddCheckpointTimeToUI();
+            if (m_checkpointSound)
+            {
+                m_checkpointSound.Play();
+            }
             foreach (ParticleSystem pS in m_checkpointReachedParticle)
             {
                 pS.Play();

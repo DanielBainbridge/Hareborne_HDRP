@@ -42,6 +42,10 @@ public class CameraDolly : MonoBehaviour
         transform.localRotation = Quaternion.Euler(m_orbitAngles);
         m_camera.fieldOfView = m_cameraPOV;
     }
+    private void Awake()
+    {
+        SetCameraSensitivity();
+    }
     private void OnValidate()
     {
         if (m_maxVerticalAngle < m_minVerticalAngle)
@@ -186,5 +190,11 @@ public class CameraDolly : MonoBehaviour
         }
 
         transform.SetPositionAndRotation(lookPosition, m_lookRotation);
+    }
+    public void SetCameraSensitivity()
+    {
+        if (PlayerPrefs.GetFloat("CamSpeed") == 0)
+            PlayerPrefs.SetFloat("CamSpeed", 240);
+        m_cameraSensitivity = PlayerPrefs.GetFloat("CamSpeed");
     }
 }
