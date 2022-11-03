@@ -1,4 +1,4 @@
-//Authored By Daniel Bainbridge, Kai Van Der Staay
+//Authored By Daniel Bainbridge
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
