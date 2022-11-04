@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Transform m_camera;
     private CameraDolly m_cameraDolly;
     public float m_maxSpeed = 500f;
+    public LevelLoader m_respawnAnimation;
 
     //respawn
     private Vector3 m_respawnLocation;
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour
         UpdateGrappleHookFunction(m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_hookRigidness, m_hookPullSlow,
             m_massScale, m_grappleableObjects, m_initialPull, m_leftHookOrigin, m_rightHookOrigin);
         UpdateGrappleHookVisual(m_ropeQuality, m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight, m_affectCurve, m_chainMaterial);
-        DisableForSeconds(3);
+        //DisableForSeconds(3);
         m_leftArmTargetOriginalPos = m_leftArmTarget.localPosition;
         m_rightArmTargetOriginalPos = m_rightArmTarget.localPosition;
         m_currentState = GroundedState.grounded;
@@ -77,6 +78,7 @@ public class PlayerController : MonoBehaviour
         m_leftFire.canceled += StopLeftHook;
         m_rightFire.performed += FireRightHook;
         m_rightFire.canceled += StopRightHook;
+        m_currentState = GroundedState.grounded;
     }
     private void OnDisable()
     {
@@ -105,7 +107,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //check if the player is touching the ground
-        if (Physics.Raycast(transform.position, Vector3.down, 0.05f))
+        if (Physics.Raycast(transform.position, Vector3.down, 0.15f))
             m_currentState = GroundedState.grounded;
         else
             m_currentState = GroundedState.inAir;
@@ -155,7 +157,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("This hit an Obstacle");
+            //Debug.Log("This hit an Obstacle");
             RespawnCharacter();
         }
     }
@@ -167,11 +169,7 @@ public class PlayerController : MonoBehaviour
     }
     public void RespawnCharacter()
     {
-        transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        transform.SetPositionAndRotation(m_respawnLocation, m_respawnRotation);
-        m_leftGrapple.StopGrapple();
-        m_rightGrapple.StopGrapple();
-        m_cameraDolly.SetLookRotation(m_respawnRotation);
+        StartCoroutine(RespawnDelay());
     }
     private void FireLeftHook(InputAction.CallbackContext obj)
     {
@@ -243,5 +241,18 @@ public class PlayerController : MonoBehaviour
         OnDisable();
         yield return new WaitForSeconds(secondsToWait);
         OnEnable();
+    }
+    private IEnumerator RespawnDelay()
+    {
+        m_respawnAnimation.m_transition.Play("Crossfade_Start");
+        yield return new WaitForSeconds(1);
+        transform.SetPositionAndRotation(m_respawnLocation, m_respawnRotation);
+        transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        m_leftGrapple.StopGrapple();
+        m_rightGrapple.StopGrapple();
+        m_cameraDolly.SetLookRotation(m_respawnRotation);
+
+        yield return new WaitForSeconds(1);
+        m_respawnAnimation.m_transition.Play("Crossfade_End");
     }
 }

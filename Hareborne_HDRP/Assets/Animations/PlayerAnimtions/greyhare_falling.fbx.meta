@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: aa83950c363eaff47b7f7baf28503515
+guid: ed94e3479650a884884685b15fae50cb
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: falling
+    second: Falling
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: falling
+      name: Falling
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 135
+      lastFrame: 154
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -47,7 +47,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
