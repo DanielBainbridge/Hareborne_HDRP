@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     private Text m_timerText;
     private float m_startTime;
     private bool m_timerActive;
+    private bool isSetup = false;
     private int m_countDown;
     private CheckpointSystem m_checkpointSystem;
     [Header("Line Between Time Splits")]
@@ -22,6 +23,14 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isSetup = false;
+        Timer[] timers = FindObjectsOfType<Timer>();
+        for (int i = 0; i < timers.Length; i++)
+        {
+            if (timers[i].gameObject != gameObject)
+                Destroy(timers[i].transform.parent.transform.parent.gameObject);
+        }
+
         m_containerImage = GetComponentInParent<Image>();
         m_checkpointSystem = FindObjectOfType<CheckpointSystem>();
         m_countDown = m_checkpointSystem.m_countDown;
@@ -49,17 +58,13 @@ public class Timer : MonoBehaviour
             else
                 checkpointNumber.text = "Finish";
         }
+        isSetup = true;
 
     }
 
     private void Awake()
     {
-        Timer[] timers = FindObjectsOfType<Timer>();
-        for (int i = 0; i < timers.Length; i++)
-        {
-            if (timers[i].gameObject != gameObject)
-                Destroy(timers[i].transform.parent.transform.parent.gameObject);
-        }
+        
     }
 
     // Update is called once per frame
@@ -81,8 +86,14 @@ public class Timer : MonoBehaviour
     }
     public void StartTimer()
     {
-        m_startTime = Time.time;
-        m_timerActive = true;
+        if (isSetup == false)
+        StartTimer();
+        else
+        {
+            m_startTime = Time.time;
+            m_timerActive = true;
+        }
+        
     }
     public void StopTimer()
     {
