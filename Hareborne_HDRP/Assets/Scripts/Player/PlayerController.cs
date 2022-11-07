@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         inAir
     }
     GroundedState m_currentState;
-    void Awake()
+    void Start()
     {
         //set reference to camera
         m_cameraDolly = m_camera.GetComponent<CameraDolly>();
