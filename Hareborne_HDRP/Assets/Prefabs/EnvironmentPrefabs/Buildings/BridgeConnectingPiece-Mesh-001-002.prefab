@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8016885485620330118}
   - component: {fileID: 6408175090393772323}
   - component: {fileID: 9154302928767256041}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BridgeConnectingPiece-Mesh-001-002
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
