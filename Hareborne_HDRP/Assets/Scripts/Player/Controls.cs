@@ -174,6 +174,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ScrollWheel"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""99d79395-fae3-4f1a-b25a-fb0559ffa46d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -253,6 +262,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7e3faf4-845f-4165-91da-02233c38240c"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollWheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -270,6 +290,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_UIControls_Point = m_UIControls.FindAction("Point", throwIfNotFound: true);
         m_UIControls_Submit = m_UIControls.FindAction("Submit", throwIfNotFound: true);
         m_UIControls_Cancel = m_UIControls.FindAction("Cancel", throwIfNotFound: true);
+        m_UIControls_ScrollWheel = m_UIControls.FindAction("ScrollWheel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -382,6 +403,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_UIControls_Point;
     private readonly InputAction m_UIControls_Submit;
     private readonly InputAction m_UIControls_Cancel;
+    private readonly InputAction m_UIControls_ScrollWheel;
     public struct UIControlsActions
     {
         private @Controls m_Wrapper;
@@ -390,6 +412,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Point => m_Wrapper.m_UIControls_Point;
         public InputAction @Submit => m_Wrapper.m_UIControls_Submit;
         public InputAction @Cancel => m_Wrapper.m_UIControls_Cancel;
+        public InputAction @ScrollWheel => m_Wrapper.m_UIControls_ScrollWheel;
         public InputActionMap Get() { return m_Wrapper.m_UIControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -411,6 +434,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Cancel.started -= m_Wrapper.m_UIControlsActionsCallbackInterface.OnCancel;
                 @Cancel.performed -= m_Wrapper.m_UIControlsActionsCallbackInterface.OnCancel;
                 @Cancel.canceled -= m_Wrapper.m_UIControlsActionsCallbackInterface.OnCancel;
+                @ScrollWheel.started -= m_Wrapper.m_UIControlsActionsCallbackInterface.OnScrollWheel;
+                @ScrollWheel.performed -= m_Wrapper.m_UIControlsActionsCallbackInterface.OnScrollWheel;
+                @ScrollWheel.canceled -= m_Wrapper.m_UIControlsActionsCallbackInterface.OnScrollWheel;
             }
             m_Wrapper.m_UIControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -427,6 +453,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
+                @ScrollWheel.started += instance.OnScrollWheel;
+                @ScrollWheel.performed += instance.OnScrollWheel;
+                @ScrollWheel.canceled += instance.OnScrollWheel;
             }
         }
     }
@@ -443,5 +472,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnPoint(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnScrollWheel(InputAction.CallbackContext context);
     }
 }
