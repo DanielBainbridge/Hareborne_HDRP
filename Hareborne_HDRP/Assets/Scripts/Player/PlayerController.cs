@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
 
     //Animator Controls
     private Animator m_animator;
+
+    //private variables
+    private bool m_isRespawning = false;
     private enum GroundedState
     {
         grounded,
@@ -61,7 +64,7 @@ public class PlayerController : MonoBehaviour
         UpdateGrappleHookFunction(m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_hookRigidness, m_hookPullSlow,
             m_massScale, m_grappleableObjects, m_initialPull, m_leftHookOrigin, m_rightHookOrigin);
         UpdateGrappleHookVisual(m_ropeQuality, m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight, m_affectCurve, m_chainMaterial);
-        //DisableForSeconds(3);
+        DisableForSeconds(3);
         m_leftArmTargetOriginalPos = m_leftArmTarget.localPosition;
         m_rightArmTargetOriginalPos = m_rightArmTarget.localPosition;
         m_currentState = GroundedState.grounded;
@@ -102,7 +105,6 @@ public class PlayerController : MonoBehaviour
         //respawn of character
         if (transform.position.y <= 2)
         {
-            m_playerDeath.Play();
             RespawnCharacter();
         }
 
@@ -164,12 +166,14 @@ public class PlayerController : MonoBehaviour
 
     public void SetRespawn(Vector3 location, Quaternion rotation)
     {
+
         m_respawnLocation = location;
         m_respawnRotation = rotation;
     }
     public void RespawnCharacter()
     {
-        StartCoroutine(RespawnDelay());
+        if (!m_isRespawning)
+            StartCoroutine(RespawnDelay());
     }
     private void FireLeftHook(InputAction.CallbackContext obj)
     {
@@ -244,6 +248,8 @@ public class PlayerController : MonoBehaviour
     }
     private IEnumerator RespawnDelay()
     {
+        m_isRespawning = true;
+        m_playerDeath.Play();
         m_respawnAnimation.m_transition.Play("Crossfade_Start");
         yield return new WaitForSeconds(1);
         transform.SetPositionAndRotation(m_respawnLocation, m_respawnRotation);
@@ -254,5 +260,6 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         m_respawnAnimation.m_transition.Play("Crossfade_End");
+        m_isRespawning = false;
     }
 }

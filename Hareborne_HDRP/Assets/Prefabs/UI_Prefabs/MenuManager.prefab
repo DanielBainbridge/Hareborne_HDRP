@@ -43,3 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a40fd47fb3128c47903a643a1cc95ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_deselectedFontSize: 22
