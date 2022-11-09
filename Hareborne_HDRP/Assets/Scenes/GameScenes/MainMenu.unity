@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.042090222, g: 0.08023848, b: 0.16122416, a: 1}
+  m_IndirectSpecularColor: {r: 0.04323998, g: 0.08317349, b: 0.17081061, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1257,19 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 734f23e6be341e04cbe2855de74c3ae3, type: 2}
-  fullscreenToggle: {fileID: 1066642955}
   resolutionDropdown: {fileID: 986875831}
---- !u!114 &1066642955 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3257145282712527606, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-  m_PrefabInstance: {fileID: 3257145283018510861}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1160959412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2857,6 +2845,18 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.35714287
       objectReference: {fileID: 0}
+    - target: {fileID: 3257145282126337466, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1048733457}
+    - target: {fileID: 3257145282126337466, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetResolution
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257145282126337466, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsUI, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3257145282333875380, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2969,8 +2969,24 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1048733457}
+    - target: {fileID: 3257145282541378624, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1048733457}
+    - target: {fileID: 3257145282541378624, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetQuality
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257145282541378624, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsUI, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3257145282712527606, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
       propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257145282712527606, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3257145282712527606, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
