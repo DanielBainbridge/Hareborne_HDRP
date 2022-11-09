@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3025462771032157555}
   - component: {fileID: 2185162576059785942}
   - component: {fileID: 4158993445942564380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BridgeSide-Mesh-001-002
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7618486061832738680}
   - component: {fileID: 7125079891682432064}
   - component: {fileID: 8060303252458461010}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Reflection Probe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,9 +448,9 @@ GameObject:
   - component: {fileID: 5644461138612736282}
   - component: {fileID: 7616097375501854160}
   - component: {fileID: 2624854202449433045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bridgeCenter-001
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
