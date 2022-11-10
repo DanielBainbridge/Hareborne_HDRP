@@ -820,6 +820,7 @@ MonoBehaviour:
   m_maxRopeDistance: 0
   m_minRopeDistance: 0
   m_hookSpeed: 0
+  m_grappleCooldown: 0
   m_hookRigidness: 0
   m_hookPullSlow: 0
   m_massScale: 0
@@ -1787,6 +1788,7 @@ MonoBehaviour:
   m_maxRopeDistance: 0
   m_minRopeDistance: 0
   m_hookSpeed: 0
+  m_grappleCooldown: 0
   m_hookRigidness: 0
   m_hookPullSlow: 0
   m_massScale: 0
@@ -2043,7 +2045,6 @@ MonoBehaviour:
   m_leftGrapple: {fileID: 4106440496632460984}
   m_rightGrapple: {fileID: 6177088813313645838}
   m_camera: {fileID: 0}
-  m_maxSpeed: 500
   m_respawnAnimation: {fileID: 0}
   m_playerControls: {fileID: -944628639613478452, guid: 975456fd19fdbef43befddce52dc3a0f, type: 3}
   m_grappleableObjects:
@@ -2054,10 +2055,11 @@ MonoBehaviour:
   m_maxRopeDistance: 90
   m_minRopeDistance: 10
   m_hookSpeed: 12
+  m_grappleCooldown: 0.15
   m_hookRigidness: 3.5
   m_hookPullSlow: 7
   m_massScale: 3.5
-  m_initialPull: 0.62
+  m_initialPull: 750
   m_ropeQuality: 400
   m_damper: 14
   m_strength: 800

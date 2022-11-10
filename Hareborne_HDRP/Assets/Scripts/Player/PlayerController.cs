@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private float m_rotationSmooth = 0.1f, m_turnSmoothVelocity;
     public Transform m_camera;
     private CameraDolly m_cameraDolly;
-    public float m_maxSpeed = 500f;
+    private float m_maxSpeed = 60f;
     public LevelLoader m_respawnAnimation;
 
     //respawn
@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     [Header("Grapple Hook Functional Variables")]
     public LayerMask m_grappleableObjects;
     public Transform m_leftHookOrigin, m_rightHookOrigin;
-    public float m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_hookRigidness, m_hookPullSlow, m_massScale;
-    [Range(0.0f, 1.0f)]
+    public float m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_grappleCooldown, m_hookRigidness, m_hookPullSlow, m_massScale;
+    [Range(0.0f, 1000.0f)]
     [Tooltip("The Higher this number the stronger the initial pull")]
     public float m_initialPull;
 
@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     //Animator Controls
     private Animator m_animator;
+    private Rigidbody m_rigidBody;
 
     //private variables
     private bool m_isRespawning = false;
@@ -61,27 +62,36 @@ public class PlayerController : MonoBehaviour
         m_animator = GetComponent<Animator>();
 
         //set values from to apply to grapples here... do it...
-        UpdateGrappleHookFunction(m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_hookRigidness, m_hookPullSlow,
+        UpdateGrappleHookFunction(m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_grappleCooldown, m_hookRigidness, m_hookPullSlow,
             m_massScale, m_grappleableObjects, m_initialPull, m_leftHookOrigin, m_rightHookOrigin);
         UpdateGrappleHookVisual(m_ropeQuality, m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight, m_affectCurve, m_chainMaterial);
         DisableForSeconds(3);
         m_leftArmTargetOriginalPos = m_leftArmTarget.localPosition;
         m_rightArmTargetOriginalPos = m_rightArmTarget.localPosition;
         m_currentState = GroundedState.grounded;
+        m_rigidBody = GetComponent<Rigidbody>();
     }
     private void OnEnable()
     {
-        //set listeners for new input system to perform functions
+        // m_playerControls is a reference to the InputActionAsset
+        // m_leftFire, m_rightFire and m_cameraMovement are all inidividual actions
+
+        // first we have to enable the new system inside of code only one action map can be enabled at a time so it is important to disable it again if you switch controls
         m_playerControls.Enable();
+
+        // here we get get our ActionMap
         var gameplayActionMap = m_playerControls.FindActionMap("PlayerControls");
+
+        // here we find actions on this action map and assign them to our individual actions
         m_leftFire = gameplayActionMap.FindAction("LeftFire");
         m_rightFire = gameplayActionMap.FindAction("RightFire");
         m_cameraMovement = gameplayActionMap.FindAction("Look");
+
+        // here we set listeners for the new input system to perform functions when an action is performed or cancelled
         m_leftFire.performed += FireLeftHook;
         m_leftFire.canceled += StopLeftHook;
         m_rightFire.performed += FireRightHook;
         m_rightFire.canceled += StopRightHook;
-        m_currentState = GroundedState.grounded;
     }
     private void OnDisable()
     {
@@ -108,11 +118,13 @@ public class PlayerController : MonoBehaviour
             RespawnCharacter();
         }
 
+        float rayLength = 2.0f;
         //check if the player is touching the ground
-        if (Physics.Raycast(transform.position, Vector3.down, 0.15f))
+        if (Physics.Raycast(transform.position + (transform.up * 0.5f), -transform.up, rayLength))
             m_currentState = GroundedState.grounded;
         else
             m_currentState = GroundedState.inAir;
+        Debug.DrawLine(transform.position + transform.up, transform.position - transform.up * rayLength);
 
 
         // Updates blend tree + IK restraints on arms
@@ -120,19 +132,23 @@ public class PlayerController : MonoBehaviour
         //Updates based to grounded animation position
         if (m_currentState == GroundedState.grounded)
         {
-            m_animator.SetFloat("Still", Mathf.Lerp(m_animator.GetFloat("Still"), 0, 0.08f));
-            m_animator.SetFloat("Grappling", Mathf.Lerp(m_animator.GetFloat("Grappling"), 0, 0.08f));
+            //Set Values for blend tree to animate
+            m_animator.SetFloat("Still", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Still"), 0, 0.08f), 0, 1));
+            m_animator.SetFloat("Grappling", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Grappling"), 0, 0.08f), 0, 1));
         }
         else if (!m_rightGrapple.IsGrappling() && !m_leftGrapple.IsGrappling())
         {
-            m_animator.SetFloat("Still", Mathf.Lerp(m_animator.GetFloat("Still"), 1, 0.08f));
-            m_animator.SetFloat("Grappling", Mathf.Lerp(m_animator.GetFloat("Grappling"), 0, 0.08f));
+            //Set Values for blend tree to animate
+            m_animator.SetFloat("Still", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Still"), 1, 0.08f), 0, 1));
+            m_animator.SetFloat("Grappling", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Grappling"), 0, 0.08f), 0, 1));
         }
 
         if (m_rightGrapple.IsGrappling())
         {
-            m_animator.SetFloat("Grappling", Mathf.Lerp(m_animator.GetFloat("Grappling"), 1, 0.08f));
-            m_animator.SetFloat("Still", Mathf.Lerp(m_animator.GetFloat("Still"), 1, 0.08f));
+            //Set Values for blend tree to animate
+            m_animator.SetFloat("Grappling", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Grappling"), 1, 0.08f), 0, 1));
+            m_animator.SetFloat("Still", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Still"), Mathf.Clamp((m_rigidBody.velocity.magnitude / m_maxSpeed), 0, 1), 0.08f), 0, 1));
+            //Hands IK point to position
             m_rightArmTarget.position = Vector3.Lerp(m_rightArmTarget.position, m_rightGrapple.m_currentGrapplePosition, 0.08f);
             m_rightArmTarget.localPosition = new Vector3(Mathf.Clamp(m_rightArmTarget.position.x, 0, 50), m_rightArmTarget.localPosition.y, m_rightArmTarget.localPosition.z);
         }
@@ -142,31 +158,29 @@ public class PlayerController : MonoBehaviour
 
         if (m_leftGrapple.IsGrappling())
         {
+            //Set Values for blend tree to animate
             m_animator.SetFloat("Grappling", Mathf.Lerp(m_animator.GetFloat("Grappling"), 1, 0.08f));
-            m_animator.SetFloat("Still", Mathf.Lerp(m_animator.GetFloat("Still"), 1, 0.08f));
+            m_animator.SetFloat("Still", Mathf.Lerp(m_animator.GetFloat("Still"), Mathf.Clamp((m_rigidBody.velocity.magnitude / m_maxSpeed), 0, 1), 0.08f));
+            //Hands IK point to position
             m_leftArmTarget.position = Vector3.Lerp(m_leftArmTarget.position, m_leftGrapple.m_currentGrapplePosition, 0.08f);
             m_leftArmTarget.localPosition = new Vector3(Mathf.Clamp(m_leftArmTarget.position.x, -50, 0), m_leftArmTarget.localPosition.y, m_leftArmTarget.localPosition.z);
         }
         else
             //TODO Change this to 0 when you get the new rig
             m_leftArmTarget.localPosition = Vector3.Lerp(m_leftArmTarget.localPosition, m_leftArmTargetOriginalPos, 0.08f);
-
-
-
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        // respawn character when hitting an obstacle
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            //Debug.Log("This hit an Obstacle");
             RespawnCharacter();
         }
     }
 
     public void SetRespawn(Vector3 location, Quaternion rotation)
     {
-
         m_respawnLocation = location;
         m_respawnRotation = rotation;
     }
@@ -175,6 +189,7 @@ public class PlayerController : MonoBehaviour
         if (!m_isRespawning)
             StartCoroutine(RespawnDelay());
     }
+    // Taking an InputAction.CallbackContext allows us to add these functions to our actions with a '+='
     private void FireLeftHook(InputAction.CallbackContext obj)
     {
         m_leftGrapple.StartGrapple();
@@ -208,12 +223,13 @@ public class PlayerController : MonoBehaviour
     }
 
     //TODO these can be made to use a struct holding all information for grapplehooks
-    public void UpdateGrappleHookFunction(float maxRopeDistance, float minRopeDistance, float hookSpeed, float hookRigidness, float hookPullSlow,
+    public void UpdateGrappleHookFunction(float maxRopeDistance, float minRopeDistance, float hookSpeed,float grappleCooldown, float hookRigidness, float hookPullSlow,
         float massScale, LayerMask grappleableObjects, float initialPull, Transform leftHookOrigin, Transform rightHookOrigin)
     {
         m_leftGrapple.m_maxRopeDistance = m_rightGrapple.m_maxRopeDistance = maxRopeDistance;
         m_leftGrapple.m_minRopeDistance = m_rightGrapple.m_minRopeDistance = minRopeDistance;
         m_leftGrapple.m_hookSpeed = m_rightGrapple.m_hookSpeed = hookSpeed;
+        m_leftGrapple.m_grappleCooldown = m_rightGrapple.m_grappleCooldown = grappleCooldown;
         m_leftGrapple.m_hookRigidness = m_rightGrapple.m_hookRigidness = hookRigidness;
         m_leftGrapple.m_hookPullSlow = m_rightGrapple.m_hookPullSlow = hookPullSlow;
         m_leftGrapple.m_massScale = m_rightGrapple.m_massScale = massScale;
@@ -242,9 +258,30 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator DisableForSeconds(int secondsToWait)
     {
-        OnDisable();
+        m_playerControls.Disable();
+        m_leftFire.performed -= FireLeftHook;
+        m_leftFire.canceled -= StopLeftHook;
+        m_rightFire.performed -= FireRightHook;
+        m_rightFire.canceled -= StopRightHook;
+
+        // wait for the amount of seconds at the beginning of the game
         yield return new WaitForSeconds(secondsToWait);
-        OnEnable();
+
+        m_playerControls.Enable();
+
+        // here we get get our ActionMap
+        var gameplayActionMap = m_playerControls.FindActionMap("PlayerControls");
+
+        // here we find actions on this action map and assign them to our individual actions
+        m_leftFire = gameplayActionMap.FindAction("LeftFire");
+        m_rightFire = gameplayActionMap.FindAction("RightFire");
+        m_cameraMovement = gameplayActionMap.FindAction("Look");
+
+        // here we set listeners for the new input system to perform functions when an action is performed or cancelled
+        m_leftFire.performed += FireLeftHook;
+        m_leftFire.canceled += StopLeftHook;
+        m_rightFire.performed += FireRightHook;
+        m_rightFire.canceled += StopRightHook;
     }
     private IEnumerator RespawnDelay()
     {
@@ -252,8 +289,8 @@ public class PlayerController : MonoBehaviour
         m_playerDeath.Play();
         m_respawnAnimation.m_transition.Play("Crossfade_Start");
         yield return new WaitForSeconds(1);
-        transform.SetPositionAndRotation(m_respawnLocation, m_respawnRotation);
         transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        transform.SetPositionAndRotation(m_respawnLocation, m_respawnRotation);
         m_leftGrapple.StopGrapple();
         m_rightGrapple.StopGrapple();
         m_cameraDolly.SetLookRotation(m_respawnRotation);
