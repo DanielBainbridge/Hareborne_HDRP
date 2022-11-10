@@ -34,15 +34,15 @@ public class PlayerGrapple : MonoBehaviour
         // if raycast hits something that you can grapple onto
         if (Physics.Raycast(m_camera.position, m_camera.forward, out hit, m_maxRopeDistance, m_grappleableObjects))
         {
+            // Spring creation
             m_grapplePoint = hit.point;
             m_springJoint = m_player.gameObject.AddComponent<SpringJoint>();
             m_springJoint.autoConfigureConnectedAnchor = false;
             m_springJoint.connectedAnchor = m_grapplePoint;
 
-            // Spring creation
-            float distanceFromPoint = Vector3.Distance(m_player.position, m_grapplePoint);
+            //float distanceFromPoint = Vector3.Distance(m_player.position, m_grapplePoint);
 
-            m_springJoint.maxDistance = distanceFromPoint * 0.25f;
+            m_springJoint.maxDistance = 0f;
             m_springJoint.minDistance = 0f;
             m_player.GetComponent<Rigidbody>().AddForce((m_grapplePoint - m_player.position).normalized * m_initialPull * 10, ForceMode.Impulse);
 
@@ -50,6 +50,7 @@ public class PlayerGrapple : MonoBehaviour
             m_springJoint.spring = m_hookRigidness;
             m_springJoint.damper = m_hookPullSlow;
             m_springJoint.massScale = m_massScale;
+            m_springJoint.enableCollision = true;
         }
     }
     public void StopGrapple()
