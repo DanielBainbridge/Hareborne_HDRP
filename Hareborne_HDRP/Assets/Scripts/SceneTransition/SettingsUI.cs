@@ -9,7 +9,6 @@ public class SettingsUI : MonoBehaviour
 {
     public AudioMixer audioMixer;
     Resolution[] resolutions;
-    [SerializeField] Toggle fullscreenToggle;
 
     private bool isSetYet = false;
 
@@ -77,20 +76,7 @@ public class SettingsUI : MonoBehaviour
 
     public void SetFullscreen(bool isFullscreen)
     {
-        isFullscreen = fullscreenToggle.isOn;
-        if( isFullscreen == true ) 
-        {
-            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-        }
-        else  Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-       // else Screen.fullScreenMode = FullScreenMode.Windowed;
-
-        Debug.Log(Screen.fullScreenMode + " & " + isFullscreen);
-        /*isFullscreen = false
-        if (isFullscreen == true)
         Screen.fullScreen = isFullscreen;
-        else
-        Screen.fullScreenMode = Screen.fullScreenMode.*/
     }
 
     //Ammendment By Daniel Bainbridge

@@ -9,7 +9,7 @@ public class MenuUI : MonoBehaviour
 {
     LevelLoader m_levelLoader;
 
-    [SerializeField] int m_deselectedFontSize = 40;
+    [SerializeField] int m_deselectedFontSize = 22;
     public void TextGreyColour([SerializeField] TMP_Text _btn_Text)
     {
         _btn_Text.color = Color.grey;
@@ -19,7 +19,7 @@ public class MenuUI : MonoBehaviour
     public void TextWhiteColour([SerializeField] TMP_Text _btn_Text)
     {
         _btn_Text.color = Color.white;
-        _btn_Text.fontSize = 50;
+        _btn_Text.fontSize = m_deselectedFontSize + 4;
     }
     // Start is called before the first frame update
     void Start()

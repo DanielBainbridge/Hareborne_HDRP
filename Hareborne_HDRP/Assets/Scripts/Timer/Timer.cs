@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    private Text m_timerText;
+    private TextMeshProUGUI m_timerText;
+    //private Text m_timerText;
     private float m_startTime;
     private bool m_timerActive;
     private bool isSetup = false;
@@ -34,7 +36,7 @@ public class Timer : MonoBehaviour
         m_containerImage = GetComponentInParent<Image>();
         m_checkpointSystem = FindObjectOfType<CheckpointSystem>();
         m_countDown = m_checkpointSystem.m_countDown;
-        m_timerText = this.GetComponent<Text>();
+        m_timerText = this.GetComponent<TextMeshProUGUI>();
         StartCoroutine(WaitSeconds(m_countDown));
 
 
