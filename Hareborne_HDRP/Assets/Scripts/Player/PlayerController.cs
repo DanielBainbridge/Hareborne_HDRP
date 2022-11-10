@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private InputActionAsset m_playerControls;
     private InputAction m_leftFire, m_rightFire, m_cameraMovement;
+    [SerializeField] UnityEngine.InputSystem.PlayerInput m_playerInput;
 
     [Header("Grapple Hook Functional Variables")]
     public LayerMask m_grappleableObjects;
@@ -83,24 +84,20 @@ public class PlayerController : MonoBehaviour
         var gameplayActionMap = m_playerControls.FindActionMap("PlayerControls");
 
         // here we find actions on this action map and assign them to our individual actions
-        m_leftFire = gameplayActionMap.FindAction("LeftFire");
-        m_rightFire = gameplayActionMap.FindAction("RightFire");
-        m_cameraMovement = gameplayActionMap.FindAction("Look");
-
-        // here we set listeners for the new input system to perform functions when an action is performed or cancelled
-        m_leftFire.performed += FireLeftHook;
-        m_leftFire.canceled += StopLeftHook;
-        m_rightFire.performed += FireRightHook;
-        m_rightFire.canceled += StopRightHook;
+        m_playerInput.actions["LeftFire"].performed += FireLeftHook;
+        m_playerInput.actions["LeftFire"].canceled += StopLeftHook;
+        m_playerInput.actions["RightFire"].performed += FireRightHook;
+        m_playerInput.actions["RightFire"].canceled += StopRightHook;
+        m_currentState = GroundedState.grounded;
     }
-    private void OnDisable()
+    /*private void OnDisable()
     {
         m_playerControls.Disable();
         m_leftFire.performed -= FireLeftHook;
         m_leftFire.canceled -= StopLeftHook;
         m_rightFire.performed -= FireRightHook;
         m_rightFire.canceled -= StopRightHook;
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -217,7 +214,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector2 input = m_cameraMovement.ReadValue<Vector2>();
+        Vector2 input = m_playerInput.actions["Look"].ReadValue<Vector2>();
         input.Normalize();
         m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
     }
