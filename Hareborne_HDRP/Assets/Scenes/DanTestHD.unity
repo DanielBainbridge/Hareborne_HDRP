@@ -10970,6 +10970,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 764276098}
     - target: {fileID: 6117548964857787238, guid: c78ae76734b09154db5f4283e4d9833c, type: 3}
+      propertyPath: m_initialPull
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6117548964857787238, guid: c78ae76734b09154db5f4283e4d9833c, type: 3}
+      propertyPath: m_grappleCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6117548964857787238, guid: c78ae76734b09154db5f4283e4d9833c, type: 3}
       propertyPath: m_respawnAnimation
       value: 
       objectReference: {fileID: 455284400}
