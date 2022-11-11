@@ -22,7 +22,9 @@ public class CheckpointSystem : MonoBehaviour
     /// <summary>
     /// Set a reference to the player from within the scene
     /// </summary>
-    void Start()
+
+    // Custom start call to be used by the Game manager, ****REQUIRED TO RUN TO PLAY THE GAME****
+    public void Initialise()
     {
         m_player = FindObjectOfType<PlayerController>();
         m_levelLoader = FindObjectOfType<LevelLoader>();
