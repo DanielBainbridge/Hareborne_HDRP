@@ -7,7 +7,9 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     float m_RecordedTime;
-    //[HideInInspector]
+    [Header("Checkpoint Order")]
+    public int m_checkpointOrderNumber;
+    [HideInInspector]
     public bool m_triggered;
     private CheckpointSystem m_parentSystem;
     [HideInInspector]
