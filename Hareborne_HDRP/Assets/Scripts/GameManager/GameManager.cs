@@ -32,12 +32,18 @@ public class GameManager : MonoBehaviour
 
         // Select Random Checkpoint
         int checkpointsToUse = GetRandomLevel();
+        //use random chackpoint system
         m_usedCheckpointSystem = m_checkpointSystems[checkpointsToUse];
         m_usedCheckpointSystem.gameObject.SetActive(true);
 
+
+        ////use selected level
+        //m_usedCheckpointSystem = m_checkpointSystems[PlayerPrefs.GetInt("CurrentLevel")];
+        //m_usedCheckpointSystem.gameObject.SetActive(true);
+
+
         // Checkpoint System Start
         m_usedCheckpointSystem.Initialise();
-
         // Player Start
         m_playerInScene.Initialise();
         // Camera Start
