@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     //private variables
     private bool m_isRespawning = false;
+    public PauseMenu _pauseMenu;
     private enum GroundedState
     {
         grounded,
@@ -102,69 +103,77 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //lock cursor to the center of the screen
-        Cursor.lockState = CursorLockMode.Locked;
-
-        //rotation of player
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, m_camera.eulerAngles.y, ref m_turnSmoothVelocity, m_rotationSmooth);
-        transform.rotation = Quaternion.Euler(0, angle, 0);
-
-        //respawn of character
-        if (transform.position.y <= 2)
+        if (_pauseMenu._ispaused)
         {
-            RespawnCharacter();
+            return;
         }
-
-        float rayLength = 2.0f;
-        //check if the player is touching the ground
-        if (Physics.Raycast(transform.position + (transform.up * 0.5f), -transform.up, rayLength))
-            m_currentState = GroundedState.grounded;
-        else
-            m_currentState = GroundedState.inAir;
-        Debug.DrawLine(transform.position + transform.up, transform.position - transform.up * rayLength);
-
-
-        // Updates blend tree + IK restraints on arms
-
-        //Updates based to grounded animation position
-        if (m_currentState == GroundedState.grounded)
+        else 
         {
-            //Set Values for blend tree to animate
-            m_animator.SetFloat("Still", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Still"), 0, 0.08f), 0, 1));
-            m_animator.SetFloat("Grappling", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Grappling"), 0, 0.08f), 0, 1));
-        }
-        else if (!m_rightGrapple.IsGrappling() && !m_leftGrapple.IsGrappling())
-        {
-            //Set Values for blend tree to animate
-            m_animator.SetFloat("Still", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Still"), 1, 0.08f), 0, 1));
-            m_animator.SetFloat("Grappling", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Grappling"), 0, 0.08f), 0, 1));
-        }
+            //lock cursor to the center of the screen
+            Cursor.lockState = CursorLockMode.Locked;
 
-        if (m_rightGrapple.IsGrappling())
-        {
-            //Set Values for blend tree to animate
-            m_animator.SetFloat("Grappling", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Grappling"), 1, 0.08f), 0, 1));
-            m_animator.SetFloat("Still", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Still"), Mathf.Clamp((m_rigidBody.velocity.magnitude / m_maxSpeed), 0, 1), 0.08f), 0, 1));
-            //Hands IK point to position
-            m_rightArmTarget.position = Vector3.Lerp(m_rightArmTarget.position, m_rightGrapple.m_currentGrapplePosition, 0.08f);
-            m_rightArmTarget.localPosition = new Vector3(Mathf.Clamp(m_rightArmTarget.position.x, 0, 50), m_rightArmTarget.localPosition.y, m_rightArmTarget.localPosition.z);
-        }
-        else
-            //TODO Change this to 0 when you get the new rig
-            m_rightArmTarget.localPosition = Vector3.Lerp(m_rightArmTarget.localPosition, m_rightArmTargetOriginalPos, 0.08f);
+            //rotation of player
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, m_camera.eulerAngles.y, ref m_turnSmoothVelocity, m_rotationSmooth);
+            transform.rotation = Quaternion.Euler(0, angle, 0);
 
-        if (m_leftGrapple.IsGrappling())
-        {
-            //Set Values for blend tree to animate
-            m_animator.SetFloat("Grappling", Mathf.Lerp(m_animator.GetFloat("Grappling"), 1, 0.08f));
-            m_animator.SetFloat("Still", Mathf.Lerp(m_animator.GetFloat("Still"), Mathf.Clamp((m_rigidBody.velocity.magnitude / m_maxSpeed), 0, 1), 0.08f));
-            //Hands IK point to position
-            m_leftArmTarget.position = Vector3.Lerp(m_leftArmTarget.position, m_leftGrapple.m_currentGrapplePosition, 0.08f);
-            m_leftArmTarget.localPosition = new Vector3(Mathf.Clamp(m_leftArmTarget.position.x, -50, 0), m_leftArmTarget.localPosition.y, m_leftArmTarget.localPosition.z);
+            //respawn of character
+            if (transform.position.y <= 2)
+            {
+                RespawnCharacter();
+            }
+
+            float rayLength = 2.0f;
+            //check if the player is touching the ground
+            if (Physics.Raycast(transform.position + (transform.up * 0.5f), -transform.up, rayLength))
+                m_currentState = GroundedState.grounded;
+            else
+                m_currentState = GroundedState.inAir;
+            Debug.DrawLine(transform.position + transform.up, transform.position - transform.up * rayLength);
+
+
+            // Updates blend tree + IK restraints on arms
+
+            //Updates based to grounded animation position
+            if (m_currentState == GroundedState.grounded)
+            {
+                //Set Values for blend tree to animate
+                m_animator.SetFloat("Still", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Still"), 0, 0.08f), 0, 1));
+                m_animator.SetFloat("Grappling", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Grappling"), 0, 0.08f), 0, 1));
+            }
+            else if (!m_rightGrapple.IsGrappling() && !m_leftGrapple.IsGrappling())
+            {
+                //Set Values for blend tree to animate
+                m_animator.SetFloat("Still", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Still"), 1, 0.08f), 0, 1));
+                m_animator.SetFloat("Grappling", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Grappling"), 0, 0.08f), 0, 1));
+            }
+
+            if (m_rightGrapple.IsGrappling())
+            {
+                //Set Values for blend tree to animate
+                m_animator.SetFloat("Grappling", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Grappling"), 1, 0.08f), 0, 1));
+                m_animator.SetFloat("Still", Mathf.Clamp(Mathf.Lerp(m_animator.GetFloat("Still"), Mathf.Clamp((m_rigidBody.velocity.magnitude / m_maxSpeed), 0, 1), 0.08f), 0, 1));
+                //Hands IK point to position
+                m_rightArmTarget.position = Vector3.Lerp(m_rightArmTarget.position, m_rightGrapple.m_currentGrapplePosition, 0.08f);
+                m_rightArmTarget.localPosition = new Vector3(Mathf.Clamp(m_rightArmTarget.position.x, 0, 50), m_rightArmTarget.localPosition.y, m_rightArmTarget.localPosition.z);
+            }
+            else
+                //TODO Change this to 0 when you get the new rig
+                m_rightArmTarget.localPosition = Vector3.Lerp(m_rightArmTarget.localPosition, m_rightArmTargetOriginalPos, 0.08f);
+
+            if (m_leftGrapple.IsGrappling())
+            {
+                //Set Values for blend tree to animate
+                m_animator.SetFloat("Grappling", Mathf.Lerp(m_animator.GetFloat("Grappling"), 1, 0.08f));
+                m_animator.SetFloat("Still", Mathf.Lerp(m_animator.GetFloat("Still"), Mathf.Clamp((m_rigidBody.velocity.magnitude / m_maxSpeed), 0, 1), 0.08f));
+                //Hands IK point to position
+                m_leftArmTarget.position = Vector3.Lerp(m_leftArmTarget.position, m_leftGrapple.m_currentGrapplePosition, 0.08f);
+                m_leftArmTarget.localPosition = new Vector3(Mathf.Clamp(m_leftArmTarget.position.x, -50, 0), m_leftArmTarget.localPosition.y, m_leftArmTarget.localPosition.z);
+            }
+            else
+                //TODO Change this to 0 when you get the new rig
+                m_leftArmTarget.localPosition = Vector3.Lerp(m_leftArmTarget.localPosition, m_leftArmTargetOriginalPos, 0.08f);
         }
-        else
-            //TODO Change this to 0 when you get the new rig
-            m_leftArmTarget.localPosition = Vector3.Lerp(m_leftArmTarget.localPosition, m_leftArmTargetOriginalPos, 0.08f);
+      
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -214,9 +223,18 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector2 input = m_playerInput.actions["Look"].ReadValue<Vector2>();
-        input.Normalize();
-        m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
+        if (_pauseMenu._ispaused)
+        {
+            return;
+        }
+        else
+        {
+            Vector2 input = m_playerInput.actions["Look"].ReadValue<Vector2>();
+            input.Normalize();
+            m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
+            m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
+        }
+        
     }
 
     //TODO these can be made to use a struct holding all information for grapplehooks
