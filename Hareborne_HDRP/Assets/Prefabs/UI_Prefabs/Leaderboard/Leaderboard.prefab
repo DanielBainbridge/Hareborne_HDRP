@@ -1411,24 +1411,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5419543984738073172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b75201b6662a6f48a929381f89edf67, type: 3}
+  m_Script: {fileID: 11500000, guid: 68f02f2d22bd9dc438c44bfad66da0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MemberName: {fileID: 5419543984278596132}
   PlayerTime: {fileID: 5419543984758576400}
-  playerNames: {fileID: 0}
-  playerTimes: {fileID: 0}
-  ID: 8476
+  playerNames: {fileID: 5419543984372092821}
+  playerTimes: {fileID: 5419543984327989464}
+  ID: 0
   scoreToUpload: 0
   scoreToBeat: 0
-  entries:
-  - {fileID: 5419543984372092821}
-  - {fileID: 5419543984327989464}
-  - {fileID: 5419543984171804170}
+  entries: []
   names: []
   conectText: {fileID: 5419543985008266295}
-  leaderboard: {fileID: 5419543985022987615}
-  inputInfo: {fileID: 5419543984278596130}
+  leaderboard: {fileID: 5419543984738073172}
+  inputInfo: {fileID: 5419543984171804168}
   _reconnect: {fileID: 5419543984526070893}
 --- !u!1 &5419543984758576414
 GameObject:
