@@ -27,6 +27,15 @@ public class MenuUI : MonoBehaviour
         m_levelLoader = FindObjectOfType<LevelLoader>();
     }
 
+    public void SelectLevel(int levelNumber)
+    {
+        PlayerPrefs.SetInt("CurrentLevel", levelNumber);
+    }
+    public void ResetLevel()
+    {
+        m_levelLoader.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void LoadLevel(int sceneIndex)
     {
         m_levelLoader.LoadScene(sceneIndex);
