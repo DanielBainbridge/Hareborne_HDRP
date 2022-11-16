@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     // I need a list of checkpoints, I need to reference the player, audio reference
 
     // Checkpoint related variables
-    private List<CheckpointSystem> m_checkpointSystems;
+    private List<CheckpointSystem> m_checkpointSystems = new List<CheckpointSystem>();
     private CheckpointSystem m_usedCheckpointSystem;
 
     // Player related variables
@@ -28,18 +28,12 @@ public class GameManager : MonoBehaviour
             m_checkpointSystems.Add(checkpoints[i]);
         }
         m_playerInScene = FindObjectOfType<PlayerController>();
+        m_mainCamera = FindObjectOfType<CameraDolly>();
 
 
-        // Select Random Checkpoint
-        int checkpointsToUse = GetRandomLevel();
-        //use random chackpoint system
-        m_usedCheckpointSystem = m_checkpointSystems[checkpointsToUse];
+        //use selected level
+        m_usedCheckpointSystem = m_checkpointSystems[PlayerPrefs.GetInt("CurrentLevel")];
         m_usedCheckpointSystem.gameObject.SetActive(true);
-
-
-        ////use selected level
-        //m_usedCheckpointSystem = m_checkpointSystems[PlayerPrefs.GetInt("CurrentLevel")];
-        //m_usedCheckpointSystem.gameObject.SetActive(true);
 
 
         // Checkpoint System Start

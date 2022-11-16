@@ -57,7 +57,15 @@ public class PlayerController : MonoBehaviour
         inAir
     }
     GroundedState m_currentState;
-    void Start()
+    
+    private void OnDisable()
+    {
+        m_playerInput.actions["LeftFire"].performed -= FireLeftHook;
+        m_playerInput.actions["LeftFire"].canceled -= StopLeftHook;
+        m_playerInput.actions["RightFire"].performed -= FireRightHook;
+        m_playerInput.actions["RightFire"].canceled -= StopRightHook;
+    }
+    public void Initialise()
     {
         //set reference to camera
         m_cameraDolly = m_camera.GetComponent<CameraDolly>();
@@ -72,9 +80,7 @@ public class PlayerController : MonoBehaviour
         m_rightArmTargetOriginalPos = m_rightArmTarget.localPosition;
         m_currentState = GroundedState.grounded;
         m_rigidBody = GetComponent<Rigidbody>();
-    }
-    private void OnEnable()
-    {
+
         // m_playerControls is a reference to the InputActionAsset
         // m_leftFire, m_rightFire and m_cameraMovement are all inidividual actions
 
@@ -91,14 +97,6 @@ public class PlayerController : MonoBehaviour
         m_playerInput.actions["RightFire"].canceled += StopRightHook;
         m_currentState = GroundedState.grounded;
     }
-    /*private void OnDisable()
-    {
-        m_playerControls.Disable();
-        m_leftFire.performed -= FireLeftHook;
-        m_leftFire.canceled -= StopLeftHook;
-        m_rightFire.performed -= FireRightHook;
-        m_rightFire.canceled -= StopRightHook;
-    }*/
 
     // Update is called once per frame
     void Update()
@@ -234,7 +232,6 @@ public class PlayerController : MonoBehaviour
             m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
             m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
         }
-        
     }
 
     //TODO these can be made to use a struct holding all information for grapplehooks
