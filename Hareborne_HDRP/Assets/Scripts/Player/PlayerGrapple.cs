@@ -53,7 +53,7 @@ public class PlayerGrapple : MonoBehaviour
                 //set spring to pull you all the way towards the point and add a force onto that to get an initial tug on the grapple
                 m_springJoint.maxDistance = 0.1f;
                 m_springJoint.minDistance = 0f;
-                m_player.GetComponent<Rigidbody>().AddForce((m_grapplePoint - m_player.position).normalized * m_initialPull, ForceMode.Force);
+                m_player.GetComponent<Rigidbody>().AddForce((m_grapplePoint - m_player.position).normalized * m_initialPull, ForceMode.Acceleration);
 
 
                 m_springJoint.spring = m_hookRigidness;

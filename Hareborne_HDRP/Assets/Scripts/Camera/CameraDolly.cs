@@ -33,19 +33,6 @@ public class CameraDolly : MonoBehaviour
     public float m_cameraDistance = 12;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        m_camera = transform.GetComponent<Camera>();
-        transform.position = m_cameraTarget.position;
-
-        transform.localRotation = Quaternion.Euler(m_orbitAngles);
-        m_camera.fieldOfView = m_cameraPOV;
-    }
-    private void Awake()
-    {
-        SetCameraSensitivity();
-    }
     private void OnValidate()
     {
         if (m_maxVerticalAngle < m_minVerticalAngle)
@@ -53,6 +40,19 @@ public class CameraDolly : MonoBehaviour
             m_maxVerticalAngle = m_minVerticalAngle;
         }
     }
+    // Custom start call to be used by the Game manager, ****REQUIRED TO RUN TO PLAY THE GAME****
+    public void Initialise()
+    {
+
+        m_camera = transform.GetComponent<Camera>();
+        transform.position = m_cameraTarget.position;
+
+        transform.localRotation = Quaternion.Euler(m_orbitAngles);
+        m_camera.fieldOfView = m_cameraPOV;
+
+        SetCameraSensitivity();
+    }
+
     private void LateUpdate()
     {
         UpdateCameraTarget();
