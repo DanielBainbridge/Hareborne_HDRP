@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
 
     public InputActionMap _playerInput;
     public InputAction _menu;
+    public GameObject _crosshair;
+    public GameObject _countDown;
 
     [SerializeField] GameObject _pauseUI;
     public bool _ispaused = false;
@@ -49,18 +51,24 @@ public class PauseMenu : MonoBehaviour
 
         if (_ispaused == true)
         {
+            _crosshair.SetActive(false);
+            //_countDown.SetActive(false);
             ActivateMenu();
         }
 
         else
         {
+            _crosshair.SetActive(true);
+            //_countDown.SetActive(true);
             DeActivateMenu();
         }
     }
 
     public void DeActivateMenu()
     {
-         Time.timeScale = 1;
+        _crosshair.SetActive(true);
+        //_countDown.SetActive(true);
+        Time.timeScale = 1;
         AudioListener.pause = false;
         _pauseUI.SetActive(false);
         _ispaused = false;
