@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8062475bdbeb6c642bd984664bc4b330, type: 3}
+  m_Name: ArghVFX
+  m_EditorClassIdentifier: 
+  m_prefab: {fileID: 2889874372689730452, guid: 1e1cbc5723c52f14c99e299300d159f3, type: 3}
+  m_pitchChange: 1
+  m_attach: 0
+  m_orient: 0
+  m_soundPersistance: 0
