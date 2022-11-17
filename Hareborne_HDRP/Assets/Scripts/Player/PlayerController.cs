@@ -1,5 +1,6 @@
 //Authored By Daniel Bainbridge
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private InputActionAsset m_playerControls;
     private InputAction m_leftFire, m_rightFire, m_cameraMovement;
     [SerializeField] UnityEngine.InputSystem.PlayerInput m_playerInput;
+    public PauseMenu _pauseMenu;
 
     [Header("Grapple Hook Functional Variables")]
     public LayerMask m_grappleableObjects;
@@ -40,9 +42,17 @@ public class PlayerController : MonoBehaviour
     public Transform m_rightArmTarget;
     private Vector3 m_leftArmTargetOriginalPos, m_rightArmTargetOriginalPos;
 
-    [Header("Sounds")]
-    public AudioSource m_grappleShot;
-    public AudioSource m_grappleWithdraw, m_playerDeath;
+
+    //Lists of sounds will choose random sound from list when played. Individual will play one sound.
+    [Header("Sounds:")]
+    [Header("Death")]
+    public List<VFX> m_deathSounds = new List<VFX>();
+    [Header("Grunts")]
+    public List<VFX> m_gruntSounds = new List<VFX>();
+    [Header("Voice Lines")]
+    public List<VFX> m_voiceLineSounds = new List<VFX>();
+    [Header("Chain Sound")]
+    public VFX m_chainSound;
 
     //Animator Controls
     private Animator m_animator;
@@ -50,14 +60,13 @@ public class PlayerController : MonoBehaviour
 
     //private variables
     private bool m_isRespawning = false;
-    public PauseMenu _pauseMenu;
     private enum GroundedState
     {
         grounded,
         inAir
     }
     GroundedState m_currentState;
-    
+
     private void OnDisable()
     {
         m_playerInput.actions["LeftFire"].performed -= FireLeftHook;
@@ -105,7 +114,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        else 
+        else
         {
             //lock cursor to the center of the screen
             Cursor.lockState = CursorLockMode.Locked;
@@ -171,7 +180,7 @@ public class PlayerController : MonoBehaviour
                 //TODO Change this to 0 when you get the new rig
                 m_leftArmTarget.localPosition = Vector3.Lerp(m_leftArmTarget.localPosition, m_leftArmTargetOriginalPos, 0.08f);
         }
-      
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -197,25 +206,29 @@ public class PlayerController : MonoBehaviour
     private void FireLeftHook(InputAction.CallbackContext obj)
     {
         m_leftGrapple.StartGrapple();
+        //Checks if grapple was successful before playing sound
         if (m_leftGrapple.IsGrappling())
-            m_grappleShot.Play();
+            SelectRandomSound(m_gruntSounds).Spawn(transform);
     }
     private void StopLeftHook(InputAction.CallbackContext obj)
     {
-        if (m_leftGrapple.IsGrappling())
-            m_grappleWithdraw.Play();
+        //Checks if grapple was successful before playing sound
+        //if (m_leftGrapple.IsGrappling())
         m_leftGrapple.StopGrapple();
     }
     private void FireRightHook(InputAction.CallbackContext obj)
     {
         m_rightGrapple.StartGrapple();
+
+        //Checks if grapple was successful before playing sound
         if (m_rightGrapple.IsGrappling())
-            m_grappleShot.Play();
+            SelectRandomSound(m_gruntSounds).Spawn(transform);
+
     }
     private void StopRightHook(InputAction.CallbackContext obj)
     {
-        if (m_rightGrapple.IsGrappling())
-            m_grappleWithdraw.Play();
+        //Checks if grapple was successful before playing sound
+        //if (m_rightGrapple.IsGrappling())
         m_rightGrapple.StopGrapple();
     }
 
@@ -235,7 +248,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //TODO these can be made to use a struct holding all information for grapplehooks
-    public void UpdateGrappleHookFunction(float maxRopeDistance, float minRopeDistance, float hookSpeed,float grappleCooldown, float hookRigidness, float hookPullSlow,
+    public void UpdateGrappleHookFunction(float maxRopeDistance, float minRopeDistance, float hookSpeed, float grappleCooldown, float hookRigidness, float hookPullSlow,
         float massScale, LayerMask grappleableObjects, float initialPull, Transform leftHookOrigin, Transform rightHookOrigin)
     {
         m_leftGrapple.m_maxRopeDistance = m_rightGrapple.m_maxRopeDistance = maxRopeDistance;
@@ -297,8 +310,8 @@ public class PlayerController : MonoBehaviour
     }
     private IEnumerator RespawnDelay()
     {
+        SelectRandomSound(m_deathSounds).Spawn(transform);
         m_isRespawning = true;
-        m_playerDeath.Play();
         m_respawnAnimation.m_transition.Play("Crossfade_Start");
         yield return new WaitForSeconds(1);
         transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -310,5 +323,10 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
         m_respawnAnimation.m_transition.Play("Crossfade_End");
         m_isRespawning = false;
+    }
+
+    private VFX SelectRandomSound(List<VFX> VFXList)
+    {
+        return VFXList[(int)Random.Range(0, VFXList.Count)];
     }
 }

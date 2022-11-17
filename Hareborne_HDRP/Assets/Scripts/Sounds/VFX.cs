@@ -23,16 +23,16 @@ public class VFX : ScriptableObject
         if (newFX.GetComponent<AudioSource>() && m_pitchChange)
         {
             //changes pitch of sound component in a random range
-            newFX.GetComponent<AudioSource>().pitch = Random.Range(0.5f, 2.0f);
+            newFX.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
         }
         if (!m_soundPersistance)
         {
-            Despawn();
+            Despawn(newFX);
         }
         return newFX;
     }
-    public void Despawn()
+    public void Despawn(GameObject effectToDestroy)
     {
-        Destroy(this, 10);
+        Destroy(effectToDestroy, 10);
     }
 }
