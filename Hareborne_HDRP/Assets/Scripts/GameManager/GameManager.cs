@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private List<CheckpointSystem> m_checkpointSystems = new List<CheckpointSystem>();
     private CheckpointSystem m_usedCheckpointSystem;
     private Timer m_sceneTimer;
+    private PlayerCrosshair m_crosshair;
 
     // Player related variables
     private PlayerController m_playerInScene;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
         m_playerInScene = FindObjectOfType<PlayerController>();
         m_mainCamera = FindObjectOfType<CameraDolly>();
         m_sceneTimer = FindObjectOfType<Timer>();
+        m_crosshair = FindObjectOfType<PlayerCrosshair>();
 
 
         //use selected level
@@ -46,6 +48,8 @@ public class GameManager : MonoBehaviour
         m_mainCamera.Initialise();
         // Timer Start
         m_sceneTimer.Initialise();
+        //Crosshair Start
+        m_crosshair.Initialise();
     }
 
     private static uint BitRotate(uint x)

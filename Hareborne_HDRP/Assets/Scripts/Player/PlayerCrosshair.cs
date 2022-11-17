@@ -10,7 +10,8 @@ public class PlayerCrosshair : MonoBehaviour
     private PlayerGrapple m_grappleInfo;
     private Image m_crosshair;
     public Color m_grapplePossibleColour, grappleNotPossibleColour;
-    private void Start()
+    
+    public void Initialise()
     {
         m_player = FindObjectOfType<PlayerController>();
         m_grappleInfo = m_player.m_leftGrapple;

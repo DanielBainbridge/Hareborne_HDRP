@@ -31,10 +31,6 @@ public class MenuUI : MonoBehaviour
     {
         PlayerPrefs.SetInt("CurrentLevel", levelNumber);
     }
-    public void ResetLevel()
-    {
-        m_levelLoader.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
 
     public void LoadLevel(int sceneIndex)
     {
