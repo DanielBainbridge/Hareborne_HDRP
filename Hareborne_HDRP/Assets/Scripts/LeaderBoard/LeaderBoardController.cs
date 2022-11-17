@@ -162,6 +162,7 @@ IEnumerator SetupRoutine()
                            scoreToBeat = members[i].score;
                         }
                         name = members[i].player.name;
+                        Debug.Log(members[i].rank);
                         entries[i].text = (members[i].rank + ". " + "username: " + members[i].player.name + " Time: " + members[i].score);
                        string memberid = members[i].member_id;
                         /*else
