@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -107,5 +108,12 @@ public class PauseMenu : MonoBehaviour
         else
         Debug.Log("Menu opening error. Check inspector.");
         Debug.Log("failed to open.");
+    }
+
+    public void ResetLevel()
+    {
+        Destroy(this.transform.parent);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 }

@@ -19,10 +19,12 @@ public class LeaderBoardController : MonoBehaviour
     public GameObject leaderboard;
     public GameObject inputInfo;
     public GameObject _reconnect;
+    public Timer _timer;
 
 
 void Start()
 {
+    _timer = FindObjectOfType<Timer>();
     StartCoroutine(SetupRoutine());
 }
 
@@ -123,7 +125,7 @@ IEnumerator SetupRoutine()
    {
     bool done = false;
     string PlayerID = PlayerPrefs.GetString("PlayerID");
-    LootLockerSDKManager.SubmitScore(PlayerID, int.Parse(PlayerTime.text), ID, (response) =>
+    LootLockerSDKManager.SubmitScore(PlayerID, (int)_timer.m_totalTime, ID, (response) =>
     {
         if (response.success)
         {
@@ -221,7 +223,7 @@ IEnumerator SetupRoutine()
 
         void Update()
         {
-            if (scoreToUpload < scoreToBeat)
+            if (_timer.m_totalTime < scoreToBeat || scoreToBeat == 0)
             {
                 inputInfo.SetActive(true);
             }

@@ -107,6 +107,8 @@ public class PlayerController : MonoBehaviour
         m_playerInput.actions["RightFire"].performed += FireRightHook;
         m_playerInput.actions["RightFire"].canceled += StopRightHook;
         m_currentState = GroundedState.grounded;
+
+
     }
 
     // Update is called once per frame
