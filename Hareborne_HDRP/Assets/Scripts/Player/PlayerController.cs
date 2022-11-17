@@ -52,11 +52,13 @@ public class PlayerController : MonoBehaviour
     [Header("Voice Lines")]
     public List<VFX> m_voiceLineSounds = new List<VFX>();
     [Header("Chain Sound")]
-    public VFX m_chainSound;
+    public VFX m_grappleLaunch;
+    public VFX m_grappleRetract;
 
     //Animator Controls
     private Animator m_animator;
     private Rigidbody m_rigidBody;
+    private float m_lastSoundPlayed = 2.0f;
 
     //private variables
     private bool m_isRespawning = false;
@@ -180,7 +182,10 @@ public class PlayerController : MonoBehaviour
                 //TODO Change this to 0 when you get the new rig
                 m_leftArmTarget.localPosition = Vector3.Lerp(m_leftArmTarget.localPosition, m_leftArmTargetOriginalPos, 0.08f);
         }
-
+        if(m_lastSoundPlayed <= 1.4f)
+        {
+            m_lastSoundPlayed += Time.deltaTime;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -208,7 +213,7 @@ public class PlayerController : MonoBehaviour
         m_leftGrapple.StartGrapple();
         //Checks if grapple was successful before playing sound
         if (m_leftGrapple.IsGrappling())
-            SelectRandomSound(m_gruntSounds).Spawn(transform);
+            StartCoroutine(FireHookSound());
     }
     private void StopLeftHook(InputAction.CallbackContext obj)
     {
@@ -222,7 +227,7 @@ public class PlayerController : MonoBehaviour
 
         //Checks if grapple was successful before playing sound
         if (m_rightGrapple.IsGrappling())
-            SelectRandomSound(m_gruntSounds).Spawn(transform);
+            StartCoroutine(FireHookSound());
 
     }
     private void StopRightHook(InputAction.CallbackContext obj)
@@ -328,5 +333,15 @@ public class PlayerController : MonoBehaviour
     private VFX SelectRandomSound(List<VFX> VFXList)
     {
         return VFXList[(int)Random.Range(0, VFXList.Count)];
+    }
+    IEnumerator FireHookSound()
+    {
+        if(m_lastSoundPlayed >= 1.4f)
+        {
+            m_grappleLaunch.Spawn(transform);
+            yield return new WaitForSeconds(0.1f);
+            SelectRandomSound(m_gruntSounds).Spawn(transform);
+            m_lastSoundPlayed = 0f;
+        }
     }
 }

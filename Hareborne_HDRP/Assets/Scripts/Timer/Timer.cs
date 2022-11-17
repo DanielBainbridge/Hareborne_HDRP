@@ -19,7 +19,9 @@ public class Timer : MonoBehaviour
     [Header("Text Prefab To Add for Splits")]
     public Text m_textPrefab;
     private Image m_containerImage;
-
+    //total time float
+    [Header("Total Time Taken")]
+    public float m_totalTime;
 
     public void Initialise()
     {

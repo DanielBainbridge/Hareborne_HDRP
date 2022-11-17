@@ -47,6 +47,7 @@ public class CheckpointSystem : MonoBehaviour
 
     public void LevelFinished()
     {
+        m_timer.m_totalTime = m_timer.GetCurrentTime();
         //loads end win screen
         m_levelLoader.LoadScene(1);
         FindObjectOfType<PlayerCrosshair>().gameObject.SetActive(false);
