@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5520381217799665538}
   - component: {fileID: 8877596440673712167}
   - component: {fileID: 6689949519107329261}
-  m_Layer: 0
-  m_Name: BridgeCenter-Mesh-001
+  m_Layer: 6
+  m_Name: BridgeCenter-Mesh-001-002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

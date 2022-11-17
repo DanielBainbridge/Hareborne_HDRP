@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5644461138612736282}
   - component: {fileID: 7616097375501854160}
   - component: {fileID: 2624854202449433045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bridgeCenter-001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

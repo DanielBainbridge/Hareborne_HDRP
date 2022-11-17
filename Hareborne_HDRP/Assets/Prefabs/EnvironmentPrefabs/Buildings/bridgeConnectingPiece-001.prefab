@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 948637468107704132}
   - component: {fileID: 4217030978580809953}
   - component: {fileID: 2116991016164686891}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bridgeConnectingPiece-001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 2927293118523524206}
   - component: {fileID: 6228416504435201209}
   - component: {fileID: 9212512297286941045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Reflection Probe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

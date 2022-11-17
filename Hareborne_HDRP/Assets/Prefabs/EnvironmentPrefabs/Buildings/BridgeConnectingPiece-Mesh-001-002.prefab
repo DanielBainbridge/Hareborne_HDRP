@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 8016885485620330118}
   - component: {fileID: 6408175090393772323}
   - component: {fileID: 9154302928767256041}
+  - component: {fileID: 1484184331762805469}
   m_Layer: 6
   m_Name: BridgeConnectingPiece-Mesh-001-002
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,3 +83,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1484184331762805469
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7208682400389407804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3763294, y: 4.739214, z: 5.93395}
+  m_Center: {x: -1.5812651, y: 1.2951741, z: -2.5470328}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4066022440910128244}
   - component: {fileID: 1135666092337269713}
   - component: {fileID: 2893075688395964187}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BridgeSide(DualMaterials)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

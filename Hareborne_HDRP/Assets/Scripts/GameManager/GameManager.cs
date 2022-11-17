@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     // Checkpoint related variables
     private List<CheckpointSystem> m_checkpointSystems = new List<CheckpointSystem>();
     private CheckpointSystem m_usedCheckpointSystem;
+    private Timer m_sceneTimer;
 
     // Player related variables
     private PlayerController m_playerInScene;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
         }
         m_playerInScene = FindObjectOfType<PlayerController>();
         m_mainCamera = FindObjectOfType<CameraDolly>();
+        m_sceneTimer = FindObjectOfType<Timer>();
 
 
         //use selected level
@@ -42,7 +44,8 @@ public class GameManager : MonoBehaviour
         m_playerInScene.Initialise();
         // Camera Start
         m_mainCamera.Initialise();
-        // Play Start Audio
+        // Timer Start
+        m_sceneTimer.Initialise();
     }
 
     private static uint BitRotate(uint x)
