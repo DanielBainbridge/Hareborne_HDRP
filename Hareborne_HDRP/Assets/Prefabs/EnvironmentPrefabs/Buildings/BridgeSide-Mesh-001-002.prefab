@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3025462771032157555}
   - component: {fileID: 2185162576059785942}
   - component: {fileID: 4158993445942564380}
+  - component: {fileID: 8551879399524079008}
   m_Layer: 6
   m_Name: BridgeSide-Mesh-001-002
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,3 +83,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8551879399524079008
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2501550516140128201}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.877475, y: 6.4325714, z: 5.505376}
+  m_Center: {x: -2.8870268, y: -2.8576264, z: -2.5219889}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3155200159319162674}
   - component: {fileID: 2046426738471628951}
   - component: {fileID: 4288175678700291165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BridgeConnectingPiece(DualMaterials)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
