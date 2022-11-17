@@ -3616,7 +3616,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9dc3e82d183b2494c9e10fab57df4f90, type: 2}
   m_voiceLineSounds:
   - {fileID: 11400000, guid: 4456829b85fb5af4d854a1a6508c27b1, type: 2}
-  m_chainSound: {fileID: 0}
+  m_grappleLaunch: {fileID: 11400000, guid: 65f5f99aed34e1040b528a7e26555425, type: 2}
+  m_grappleRetract: {fileID: 11400000, guid: af3775d9db168cb44912f39859aa4eea, type: 2}
 --- !u!1 &6700321052357934518
 GameObject:
   m_ObjectHideFlags: 0

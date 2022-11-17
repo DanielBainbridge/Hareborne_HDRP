@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8062475bdbeb6c642bd984664bc4b330, type: 3}
-  m_Name: Grapple_ShotVFX
+  m_Name: GrappleRetract
   m_EditorClassIdentifier: 
-  m_prefab: {fileID: 7158635573364195338, guid: 0640b15c663bcc748bae3dbe403cb36f, type: 3}
-  m_pitchChange: 0
+  m_prefab: {fileID: 347702307761997384, guid: 519af985f499c7d4aa6dbb4ddff57324, type: 3}
+  m_pitchChange: 1
   m_attach: 0
   m_orient: 0
   m_soundPersistance: 0
