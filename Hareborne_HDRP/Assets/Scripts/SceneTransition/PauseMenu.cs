@@ -28,12 +28,6 @@ public class PauseMenu : MonoBehaviour
         _canvases = FindObjectsOfType<Canvas>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnEnable()
     {
         if (_menu != null)
