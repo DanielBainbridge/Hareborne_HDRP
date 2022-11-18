@@ -36,6 +36,13 @@ public class MenuUI : MonoBehaviour
     {
         m_levelLoader.LoadScene(sceneIndex);
     }
+
+    public void RestartLevel()
+    {
+        Destroy(FindObjectOfType<PauseMenu>());
+        LoadLevel(2);
+        Time.timeScale = 1;
+    }
     public void ExitGame()
     {
         Debug.Log("Exits Application");
