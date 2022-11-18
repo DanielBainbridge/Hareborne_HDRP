@@ -112,7 +112,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResetLevel()
     {
-        Destroy(this.transform.parent);
+        Destroy(this.gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
