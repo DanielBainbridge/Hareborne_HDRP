@@ -36,7 +36,7 @@ public class Timer : MonoBehaviour
         m_containerImage = GetComponentInParent<Image>();
         m_countDown = m_checkpointSystem.m_countDown;
         m_timerText = this.GetComponent<TextMeshProUGUI>();
-        m_lineSpace = m_containerImage.rectTransform.rect.height / m_checkpointSystem.m_checkpoints.Count;
+        m_lineSpace = m_containerImage.rectTransform.rect.height / m_checkpointSystem.m_checkpoints.Count /2;
         StartCoroutine(WaitSeconds(m_countDown));
 
 
