@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CheckpointSystem : MonoBehaviour
 {
@@ -52,7 +53,7 @@ public class CheckpointSystem : MonoBehaviour
         m_levelLoader.LoadScene(1);
         FindObjectOfType<PlayerCrosshair>().gameObject.SetActive(false);
         StartCoroutine(MoveTimer());
-        
+
     }
 
     /// <summary>
@@ -179,8 +180,7 @@ public class CheckpointSystem : MonoBehaviour
     }
     private IEnumerator MoveTimer()
     {
-        yield return new WaitForSeconds(1);        
-        m_timer.transform.parent.transform.Translate(new Vector2(200, -100));
+        yield return new WaitForSeconds(1);
         Cursor.lockState = CursorLockMode.None;
     }
 }

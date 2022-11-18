@@ -97,7 +97,10 @@ public class Timer : MonoBehaviour
         string minutes = ((int)currentTime / 60).ToString();
         string seconds = (currentTime % 60).ToString("f2");
         checkpointTime.text = minutes + " : " + seconds;
-        transform.Translate(new Vector3(0, -m_lineSpace, 0));
+        if (m_checkpointSystem.m_currentTriggeredCheckpoint != m_checkpointSystem.m_checkpoints.Count - 1)
+            transform.Translate(new Vector3(0, -m_lineSpace, 0));
+        else
+            transform.gameObject.SetActive(false);
     }
     private IEnumerator WaitSeconds(int secondsToWait)
     {
