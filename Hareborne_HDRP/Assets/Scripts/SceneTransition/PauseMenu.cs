@@ -66,6 +66,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         AudioListener.pause = false;
         _pauseUI.SetActive(false);
+        optionsMenu.SetActive(false);
         _ispaused = false;
     }
 

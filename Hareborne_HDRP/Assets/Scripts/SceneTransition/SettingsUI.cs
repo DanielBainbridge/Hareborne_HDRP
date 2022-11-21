@@ -83,5 +83,7 @@ public class SettingsUI : MonoBehaviour
     public void SetCameraSensitivity(float sensitivity)
     {
         PlayerPrefs.SetFloat("CamSpeed", sensitivity);
+        if(FindObjectOfType<CameraDolly>())
+            FindObjectOfType<CameraDolly>().SetCameraSensitivity();
     }
 }

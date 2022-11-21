@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 185.26924, g: 198.37863, b: 255.81436, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1574,7 +1574,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 734f23e6be341e04cbe2855de74c3ae3, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 25a678df1de507d47ab70a093c7f4538, type: 3}
+  m_audioClip: {fileID: 8300000, guid: bd592e9873f46db4a83f4ef242dc1969, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.059
   m_Pitch: 1
@@ -2429,37 +2429,13 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1048733457}
-    - target: {fileID: 9103799130091358812, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9103799130091358812, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9103799130091358812, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9103799130268199831, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1048733457}
-    - target: {fileID: 9103799130319036279, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.35714287
-      objectReference: {fileID: 0}
-    - target: {fileID: 9103799130319036279, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9103799130492641944, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
       propertyPath: m_Name
       value: OptionsMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 9103799130492641944, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9103799130492641945, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
       propertyPath: m_Pivot.x
@@ -2573,25 +2549,5 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1048733457}
-    - target: {fileID: 9103799131118696221, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9103799131118696221, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9103799131489166575, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.35714287
-      objectReference: {fileID: 0}
-    - target: {fileID: 9103799131489166575, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9103799131489166575, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.35714287
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b78b4246bfb059d4388a7ba0e68e793d, type: 3}
