@@ -66,8 +66,7 @@ public class Checkpoint : MonoBehaviour
             m_parentSystem.m_currentTriggeredCheckpoint += 1;
             if (m_parentSystem.m_currentTriggeredCheckpoint == m_parentSystem.m_checkpoints.Count)
             {
-                //load win screen scene
-                m_timer.StopTimer();
+                //load win screen scene                
                 m_parentSystem.LevelFinished();
                 return;
             }

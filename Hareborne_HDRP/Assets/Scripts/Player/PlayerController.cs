@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
         m_playerInput.actions["LeftFire"].canceled -= StopLeftHook;
         m_playerInput.actions["RightFire"].performed -= FireRightHook;
         m_playerInput.actions["RightFire"].canceled -= StopRightHook;
+        m_playerControls.Disable();
     }
     public void Initialise()
     {

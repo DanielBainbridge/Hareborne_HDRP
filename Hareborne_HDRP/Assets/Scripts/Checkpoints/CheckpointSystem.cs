@@ -19,7 +19,7 @@ public class CheckpointSystem : MonoBehaviour
     public int m_countDown = 3;
     [HideInInspector]
     public int m_currentTriggeredCheckpoint = 0;
-    private LevelLoader m_levelLoader;
+    public LevelLoader m_levelLoader;
     /// <summary>
     /// Set a reference to the player from within the scene
     /// </summary>
@@ -28,7 +28,6 @@ public class CheckpointSystem : MonoBehaviour
     public void Initialise()
     {
         m_player = FindObjectOfType<PlayerController>();
-        m_levelLoader = FindObjectOfType<LevelLoader>();
         if (transform.childCount > 0)
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -48,12 +47,7 @@ public class CheckpointSystem : MonoBehaviour
 
     public void LevelFinished()
     {
-        m_timer.m_totalTime = m_timer.GetCurrentTime();
-        //loads end win screen
-        m_levelLoader.LoadScene(1);
-        FindObjectOfType<PlayerCrosshair>().gameObject.SetActive(false);
-        StartCoroutine(MoveTimer());
-
+        StartCoroutine(LevelEnd());
     }
 
     /// <summary>
@@ -178,9 +172,15 @@ public class CheckpointSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(secondsToWait);
     }
-    private IEnumerator MoveTimer()
+    private IEnumerator LevelEnd()
     {
+        m_timer.StopTimer();
+        m_timer.m_totalTime = m_timer.GetCurrentTime();
+        //loads end win screen
+        m_levelLoader.LoadScene(1);
+        FindObjectOfType<PlayerCrosshair>().gameObject.SetActive(false);
         yield return new WaitForSeconds(1);
         Cursor.lockState = CursorLockMode.None;
+
     }
 }
