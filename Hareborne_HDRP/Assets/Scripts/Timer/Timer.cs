@@ -68,7 +68,7 @@ public class Timer : MonoBehaviour
         if (m_timerActive)
         {
             float currentTime = GetCurrentTime();
-            string minutes = ((int)currentTime / 60).ToString();
+            string minutes = ((int)currentTime / 60).ToString("0");
             string seconds = (currentTime % 60).ToString("f2");
 
             m_timerText.text = minutes + " : " + seconds;

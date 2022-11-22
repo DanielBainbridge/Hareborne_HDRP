@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class MenuUI : MonoBehaviour
 {
-    LevelLoader m_levelLoader;
+    public LevelLoader m_levelLoader;
 
     [SerializeField] int m_deselectedFontSize = 22;
+
     public void TextGreyColour([SerializeField] TMP_Text _btn_Text)
     {
         _btn_Text.color = Color.grey;
@@ -22,9 +24,21 @@ public class MenuUI : MonoBehaviour
         _btn_Text.fontSize = m_deselectedFontSize + 4;
     }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        m_levelLoader = FindObjectOfType<LevelLoader>();
+        Debug.Log(SceneManager.sceneCountInBuildSettings);
+        Time.timeScale = 1;
+        EventSystem[] eventSystems = FindObjectsOfType<EventSystem>();
+        if (eventSystems.Length != 0)
+        {
+            for (int i = 0; i < eventSystems.Length; i++)
+            {
+                if (eventSystems[i].gameObject != gameObject)
+                {
+                    eventSystems[i].enabled = false;
+                }
+            }
+        }
     }
 
     public void SelectLevel(int levelNumber)
@@ -34,12 +48,13 @@ public class MenuUI : MonoBehaviour
 
     public void LoadLevel(int sceneIndex)
     {
+        Destroy(FindObjectOfType<PauseMenu>());
         m_levelLoader.LoadScene(sceneIndex);
+        Time.timeScale = 1;
     }
 
     public void RestartLevel()
     {
-        Destroy(FindObjectOfType<PauseMenu>());
         LoadLevel(2);
         Time.timeScale = 1;
     }

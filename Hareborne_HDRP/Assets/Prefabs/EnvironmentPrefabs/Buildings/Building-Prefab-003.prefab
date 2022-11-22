@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5133225396533170332}
   - component: {fileID: 412116825853624448}
   - component: {fileID: 1166169693691767942}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4743050227908591031}
   - component: {fileID: 582714296855951811}
   - component: {fileID: 962908624805679341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window_5.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 6875077647888498914}
   - component: {fileID: 2389416146898088472}
   - component: {fileID: 4474406867992805296}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,8 +252,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8583962265166983712}
-  m_Layer: 0
-  m_Name: Building-Mesh-003
+  - component: {fileID: 5979431785844895070}
+  m_Layer: 6
+  m_Name: Building-Prefab-003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,3 +277,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5979431785844895070
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8965414101330356378}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 39, y: 130, z: 41}
+  m_Center: {x: -18.5, y: 64, z: -18.5}
