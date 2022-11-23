@@ -11,6 +11,15 @@ public class MenuUI : MonoBehaviour
     public LevelLoader m_levelLoader;
 
     [SerializeField] int m_deselectedFontSize = 22;
+    [SerializeField] GameObject m_mainMenu;
+    [SerializeField] GameObject m_optionsMenu;
+    [SerializeField] GameObject m_controlsMenu;
+    [SerializeField] GameObject m_creditsMenu;
+    [SerializeField] GameObject m_mainMenuDefaultButton;
+    [SerializeField] GameObject m_optionsDefaultButton;
+    [SerializeField] GameObject m_controlsDefaultButton;
+    [SerializeField] GameObject m_creditsDefaultButton;
+
 
     public void TextGreyColour([SerializeField] TMP_Text _btn_Text)
     {
@@ -39,6 +48,48 @@ public class MenuUI : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OpenControlsMenu()
+    {
+        StartCoroutine(OpenControlsMenuCoroutine());
+    }
+    public void OpenCreditsMenu()
+    {
+        StartCoroutine(OpenCreditsMenuCoroutine());
+    }
+    public void OpenOptionsMenu()
+    {
+        StartCoroutine(OpenOptionsMenuCoroutine());
+    }
+    public void BackToMainMenu()
+    {
+        StartCoroutine(BackToMainMenuCoroutine());
+    }
+
+    public IEnumerator OpenControlsMenuCoroutine()
+    {
+        m_controlsMenu.SetActive(true);
+        yield return null;
+        GetComponent<EventSystem>().SetSelectedGameObject(m_controlsDefaultButton);
+    }
+    public IEnumerator OpenCreditsMenuCoroutine()
+    {
+        m_creditsMenu.SetActive(true);
+        yield return null;
+        GetComponent<EventSystem>().SetSelectedGameObject(m_creditsDefaultButton);
+    }
+    public IEnumerator OpenOptionsMenuCoroutine()
+    {
+        m_optionsMenu.SetActive(true);
+        yield return null;
+        GetComponent<EventSystem>().SetSelectedGameObject(m_optionsDefaultButton);
+    }
+    public IEnumerator BackToMainMenuCoroutine()
+    {
+        m_mainMenu.SetActive(true);
+        yield return null;
+        GetComponent<EventSystem>().SetSelectedGameObject(m_mainMenuDefaultButton);
     }
 
     public void SelectLevel(int levelNumber)

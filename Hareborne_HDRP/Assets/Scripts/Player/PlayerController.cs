@@ -60,6 +60,9 @@ public class PlayerController : MonoBehaviour
     [Header("Chain Sound")]
     public VFX m_grappleLaunch;
     public VFX m_grappleRetract;
+    public VFX m_grappleHit;
+    [Header("Wind Sound")]
+    public VFX m_wind;
 
     //Animator Controls
     private Animator m_animator;
