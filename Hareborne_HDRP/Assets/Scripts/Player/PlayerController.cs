@@ -42,6 +42,12 @@ public class PlayerController : MonoBehaviour
     public Transform m_rightArmTarget;
     private Vector3 m_leftArmTargetOriginalPos, m_rightArmTargetOriginalPos;
 
+    [HideInInspector]
+    public Transform m_nextCheckpoint = null;
+    [Header("Wrong Way")]
+    [SerializeField]
+    private GameObject m_wrongWayObject;
+
 
     //Lists of sounds will choose random sound from list when played. Individual will play one sound.
     [Header("Sounds:")]
@@ -188,6 +194,26 @@ public class PlayerController : MonoBehaviour
         if(m_lastSoundPlayed <= 1.4f)
         {
             m_lastSoundPlayed += Time.deltaTime;
+        }
+
+        // check if facing correct way to next checkpoint
+        Vector3 posdif = transform.position - m_nextCheckpoint.position;
+        float angleForLakitu = -Mathf.Atan2(posdif.z, posdif.x) * Mathf.Rad2Deg;
+        //using the direction cause player to rotate to that direction
+        //calculate the the angle between facing forward and the way we want to be facing and convert to a value between 0 and 1
+        float angleBetweenForwardAndDesired = Vector3.Angle(transform.forward, Quaternion.Euler(0, angleForLakitu, 0) * Vector3.forward) / 180;
+        if (Vector3.Dot(transform.forward, Quaternion.Euler(0, angleForLakitu, 0) * Vector3.right) > 0)
+        {
+            angleBetweenForwardAndDesired = -angleBetweenForwardAndDesired;
+        }
+        angleBetweenForwardAndDesired = Mathf.Clamp(angleBetweenForwardAndDesired, -1.0f, 1.0f);
+        if (angleBetweenForwardAndDesired < 0)
+        {
+            m_wrongWayObject.SetActive(true);
+        }
+        else
+        {
+            m_wrongWayObject.SetActive(false);
         }
     }
 

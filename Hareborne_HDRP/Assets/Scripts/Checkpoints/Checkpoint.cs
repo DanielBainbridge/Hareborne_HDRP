@@ -41,6 +41,7 @@ public class Checkpoint : MonoBehaviour
         {
             //set respawn and collects current time
             m_parentSystem.m_player.SetRespawn(transform.position, transform.rotation);
+            
             m_RecordedTime = m_timer.GetCurrentTime();
             if(m_parentSystem.m_currentTriggeredCheckpoint != 0)
                 m_timer.AddCheckpointTimeToUI();
@@ -71,6 +72,8 @@ public class Checkpoint : MonoBehaviour
                 return;
             }
             m_parentSystem.m_checkpoints[siblingIndex + 1].gameObject.GetComponent<Collider>().enabled = true;
+            m_parentSystem.m_player.m_nextCheckpoint = m_parentSystem.m_checkpoints[siblingIndex + 1].transform;
+            Debug.Log("Current Next Checkpoint: " + m_parentSystem.m_checkpoints[siblingIndex + 1].gameObject.name);
 
             //TODO Retain the time between Scene Transitions
         }

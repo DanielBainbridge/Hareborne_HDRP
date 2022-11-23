@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 180.78613, g: 191.68571, b: 241.68494, a: 1}
+  m_IndirectSpecularColor: {r: 185.30527, g: 198.43185, b: 256.03168, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -636,6 +636,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581009027}
   m_CullTransparentMesh: 1
+--- !u!1 &731555450 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3810215711104274875, guid: 4eae62127aef57f4fa12782125d63840, type: 3}
+  m_PrefabInstance: {fileID: 3810215711139019043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!82 &768952165 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 5596626649555435189, guid: 9480752c679b5ce49bfa67105f220ad0, type: 3}
@@ -951,7 +956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 731555450}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!114 &1048733456
