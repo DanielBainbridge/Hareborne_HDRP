@@ -77,7 +77,7 @@ public class CameraDolly : MonoBehaviour
         Vector3 castDirection = castLine / castDistance;
 
         //check for 
-        if (Physics.Raycast(castFrom, lookRight, out RaycastHit hitRight, m_cameraTarget.localPosition.x))
+        if (Physics.Raycast(castFrom, lookRight, out RaycastHit hitRight, m_cameraTarget.localPosition.x, ~2))
         {
             castFrom = castFrom - lookRight * hitRight.distance;
         }

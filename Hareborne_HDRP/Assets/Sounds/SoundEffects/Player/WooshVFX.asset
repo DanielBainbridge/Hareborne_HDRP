@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8062475bdbeb6c642bd984664bc4b330, type: 3}
-  m_Name: HookImpact_VFX
+  m_Name: WooshVFX
   m_EditorClassIdentifier: 
-  m_prefab: {fileID: 4500032770985892178, guid: e6ad37507870114468dad5d90062b023, type: 3}
-  m_pitchChange: 1
+  m_prefab: {fileID: 8132489399680843563, guid: e0953d053335a0446b556cac73401b8d, type: 3}
+  m_pitchChange: 0
   m_attach: 0
   m_orient: 0
   m_soundPersistance: 0

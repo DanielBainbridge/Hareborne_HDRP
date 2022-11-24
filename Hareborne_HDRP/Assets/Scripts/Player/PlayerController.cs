@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
         //set values from to apply to grapples here... do it...
         UpdateGrappleHookFunction(m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_grappleCooldown, m_hookRigidness, m_hookPullSlow,
-            m_massScale, m_grappleableObjects, m_initialPull, m_leftHookOrigin, m_rightHookOrigin);
+            m_massScale, m_grappleableObjects, m_initialPull, m_leftHookOrigin, m_rightHookOrigin, m_grappleHit);
         UpdateGrappleHookVisual(m_ropeQuality, m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight, m_affectCurve, m_chainMaterial);
         DisableForSeconds(3);
         m_leftArmTargetOriginalPos = m_leftArmTarget.localPosition;
@@ -287,7 +287,7 @@ public class PlayerController : MonoBehaviour
 
     //TODO these can be made to use a struct holding all information for grapplehooks
     public void UpdateGrappleHookFunction(float maxRopeDistance, float minRopeDistance, float hookSpeed, float grappleCooldown, float hookRigidness, float hookPullSlow,
-        float massScale, LayerMask grappleableObjects, float initialPull, Transform leftHookOrigin, Transform rightHookOrigin)
+        float massScale, LayerMask grappleableObjects, float initialPull, Transform leftHookOrigin, Transform rightHookOrigin, VFX hookHitFX)
     {
         m_leftGrapple.m_maxRopeDistance = m_rightGrapple.m_maxRopeDistance = maxRopeDistance;
         m_leftGrapple.m_minRopeDistance = m_rightGrapple.m_minRopeDistance = minRopeDistance;
@@ -300,6 +300,7 @@ public class PlayerController : MonoBehaviour
         m_leftGrapple.m_initialPull = m_rightGrapple.m_initialPull = initialPull;
         m_leftGrapple.m_player = m_rightGrapple.m_player = transform;
         m_leftGrapple.m_camera = m_rightGrapple.m_camera = m_camera;
+        m_rightGrapple.m_hookHitFX = m_leftGrapple.m_hookHitFX = hookHitFX;
         m_leftGrapple.m_hookOrigin = leftHookOrigin;
         m_rightGrapple.m_hookOrigin = rightHookOrigin;
     }
