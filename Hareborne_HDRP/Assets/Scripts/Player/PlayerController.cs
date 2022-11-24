@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
 
     //private variables
     private bool m_isRespawning = false;
+    private float m_cameraOffsetx;
     private enum GroundedState
     {
         grounded,
@@ -90,6 +91,7 @@ public class PlayerController : MonoBehaviour
     {
         //set reference to camera
         m_cameraDolly = m_camera.GetComponent<CameraDolly>();
+        m_cameraOffsetx = m_cameraDolly.m_cameraTarget.localPosition.x;
         m_animator = GetComponent<Animator>();
 
         //set values from to apply to grapples here... do it...
@@ -218,7 +220,7 @@ public class PlayerController : MonoBehaviour
         {
             m_wrongWayObject.SetActive(false);
         }
-    }
+    }    
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -278,7 +280,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector2 input = m_playerInput.actions["Look"].ReadValue<Vector2>();
-            input.Normalize();
             m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
             m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
         }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Camera))]
 public class CameraDolly : MonoBehaviour
@@ -31,6 +32,8 @@ public class CameraDolly : MonoBehaviour
     private Quaternion m_lookRotation;
     private float m_lastManualRotationTime;
     public float m_cameraDistance = 12;
+    [SerializeField]
+    private Slider sensitivitySlider;
 
 
     private void OnValidate()
@@ -56,19 +59,28 @@ public class CameraDolly : MonoBehaviour
     private void LateUpdate()
     {
         UpdateCameraTarget();
+        
         Vector3 lookDirection = m_lookRotation * Vector3.forward;
         transform.localPosition = m_targetPosition;
         Vector3 lookPosition = (m_targetPosition - lookDirection * m_cameraDistance);
-        
+
+        Vector3 lookRight = m_lookRotation * Vector3.right;
+
 
 
         //calculations for boxcast to work with focus radius
         Vector3 rectOffset = lookDirection * m_camera.nearClipPlane;
         Vector3 rectPosition = lookPosition + rectOffset;
-        Vector3 castFrom = m_targetPosition;
+        Vector3 castFrom = m_targetPosition - new Vector3(m_cameraTarget.localPosition.x,0,0);
         Vector3 castLine = rectPosition - castFrom;
         float castDistance = castLine.magnitude;
         Vector3 castDirection = castLine / castDistance;
+
+        //check for 
+        if (Physics.Raycast(castFrom, lookRight, out RaycastHit hitRight, m_cameraTarget.localPosition.x))
+        {
+            castFrom = castFrom - lookRight * hitRight.distance;
+        }
 
         //check for collision behind camera
         if (Physics.BoxCast(castFrom, CameraHalfExtents, castDirection, out RaycastHit hit, m_lookRotation, castDistance))
@@ -98,7 +110,7 @@ public class CameraDolly : MonoBehaviour
     }
 
     private bool ManualRotation(Vector2 input)
-    {        
+    {
         const float e = 0.001f;
         if (input.x < -e || input.x > e || input.y < -e | input.y > e)
         {
@@ -194,7 +206,7 @@ public class CameraDolly : MonoBehaviour
     public void SetCameraSensitivity()
     {
         if (PlayerPrefs.GetFloat("CamSpeed") == 0)
-            PlayerPrefs.SetFloat("CamSpeed", 240);
+            PlayerPrefs.SetFloat("CamSpeed", sensitivitySlider.value);
         m_cameraSensitivity = PlayerPrefs.GetFloat("CamSpeed");
     }
 }
