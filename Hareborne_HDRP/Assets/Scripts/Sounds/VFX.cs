@@ -31,6 +31,23 @@ public class VFX : ScriptableObject
         }
         return newFX;
     }
+    public GameObject Spawn(Transform t, float pitch, float volume)
+    {
+        Transform parent = m_attach ? t : null;
+        Quaternion orientation = m_orient ? t.rotation : Quaternion.identity;
+        GameObject newFX = Instantiate(m_prefab, t.position, orientation, parent);
+        if (newFX.GetComponent<AudioSource>())
+        {
+            //changes pitch of sound component in a random range
+            newFX.GetComponent<AudioSource>().pitch = pitch;
+            newFX.GetComponent<AudioSource>().volume = volume;
+        }
+        if (!m_soundPersistance)
+        {
+            Despawn(newFX);
+        }
+        return newFX;
+    }
     public void Despawn(GameObject effectToDestroy)
     {
         Destroy(effectToDestroy, 10);

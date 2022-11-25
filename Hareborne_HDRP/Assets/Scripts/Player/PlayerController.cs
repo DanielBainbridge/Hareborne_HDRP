@@ -375,6 +375,8 @@ public class PlayerController : MonoBehaviour
             m_grappleLaunch.Spawn(transform);
             yield return new WaitForSeconds(0.1f);
             SelectRandomSound(m_gruntSounds).Spawn(transform);
+            m_wind.Spawn(transform, (m_rigidBody.velocity.magnitude / 15f), Mathf.Clamp(m_rigidBody.velocity.magnitude / 50f, 0, 1));
+            Debug.Log("Wind played with a Volume: " + m_rigidBody.velocity.magnitude / 100f + " Pitch: " + (m_rigidBody.velocity.magnitude / 15f));
             m_lastSoundPlayed = 0f;
         }
     }

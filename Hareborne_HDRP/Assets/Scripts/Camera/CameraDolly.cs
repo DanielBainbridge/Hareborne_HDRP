@@ -71,13 +71,13 @@ public class CameraDolly : MonoBehaviour
         //calculations for boxcast to work with focus radius
         Vector3 rectOffset = lookDirection * m_camera.nearClipPlane;
         Vector3 rectPosition = lookPosition + rectOffset;
-        Vector3 castFrom = m_targetPosition - new Vector3(m_cameraTarget.localPosition.x,0,0);
+        Vector3 castFrom = m_targetPosition - new Vector3(m_cameraTarget.localPosition.x * 1.1f,0,0);
         Vector3 castLine = rectPosition - castFrom;
         float castDistance = castLine.magnitude;
         Vector3 castDirection = castLine / castDistance;
 
         //check for 
-        if (Physics.Raycast(castFrom, lookRight, out RaycastHit hitRight, m_cameraTarget.localPosition.x, ~2))
+        if (Physics.Raycast(castFrom, lookRight, out RaycastHit hitRight, m_cameraTarget.localPosition.x * 2, ~2))
         {
             castFrom = castFrom - lookRight * hitRight.distance;
         }
