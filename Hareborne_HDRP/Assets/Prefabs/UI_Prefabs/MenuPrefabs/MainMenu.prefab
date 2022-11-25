@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.45
+  m_fontSize: 22
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -241,9 +241,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: 7c20c5a0e9108b54fb2cb554f4806e8e, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -252,21 +252,21 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2034909389}
+  m_TargetGraphic: {fileID: 3810215711104274872}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+        m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
@@ -275,10 +275,10 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2034909387
 MonoBehaviour:
@@ -299,7 +299,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
-          m_MethodName: TextWhiteColour
+          m_MethodName: TextGreyColour
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 534344687}
@@ -438,8 +438,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: -160}
+  m_AnchoredPosition: {x: -0.43078613, y: -4.739601}
+  m_SizeDelta: {x: -100.8617, y: -150.5209}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3616384306973721373
 GameObject:
@@ -479,7 +479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: -90}
+  m_AnchoredPosition: {x: 10, y: -85.043274}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &4844644382640507128
@@ -502,7 +502,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 285, y: 190}
+  m_CellSize: {x: 650, y: 99}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 1
@@ -627,9 +627,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: 7c20c5a0e9108b54fb2cb554f4806e8e, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -638,18 +638,18 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3810215709419877874}
+  m_TargetGraphic: {fileID: 3810215711104274872}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3810215709852349920}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -661,22 +661,10 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1301704578
 MonoBehaviour:
@@ -859,7 +847,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.45
+  m_fontSize: 22
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1008,9 +996,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: 7c20c5a0e9108b54fb2cb554f4806e8e, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -1019,18 +1007,18 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3810215709543436171}
+  m_TargetGraphic: {fileID: 3810215711104274872}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
-        m_MethodName: ExitGame
-        m_Mode: 1
+        m_MethodName: LoadLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1042,7 +1030,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1228,7 +1216,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.45
+  m_fontSize: 22
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1398,7 +1386,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.45
+  m_fontSize: 22
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1547,9 +1535,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 09af4a5eda7fb9c46906cb4c955999db, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: e5cc1cd1c59f9124989d912ecbfc7b23, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: 7c20c5a0e9108b54fb2cb554f4806e8e, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
