@@ -22,8 +22,8 @@ public class PlayerGrapple : MonoBehaviour
     public float m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_grappleCooldown, m_hookRigidness, m_hookPullSlow, m_massScale;
     [HideInInspector]
     public float m_initialPull;
-    //add hang time
     private float m_cooldownCounter;
+    public VFX m_hookHitFX;
 
     void Start()
     {
@@ -46,6 +46,7 @@ public class PlayerGrapple : MonoBehaviour
             {
                 // Spring creation
                 m_grapplePoint = hit.point;
+                StartCoroutine(PlayFXTime());
                 m_springJoint = m_player.gameObject.AddComponent<SpringJoint>();
                 m_springJoint.autoConfigureConnectedAnchor = false;
                 m_springJoint.connectedAnchor = m_grapplePoint;
@@ -62,6 +63,12 @@ public class PlayerGrapple : MonoBehaviour
                 m_springJoint.enableCollision = true;
             }
         }
+    }
+    private IEnumerator PlayFXTime()
+    {
+        yield return new WaitForSeconds(m_hookSpeed * Time.deltaTime);
+        GameObject neweffect = m_hookHitFX.Spawn(transform);
+        neweffect.transform.position = m_grapplePoint;
     }
     public void StopGrapple()
     {

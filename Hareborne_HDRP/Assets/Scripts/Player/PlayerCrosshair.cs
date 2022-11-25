@@ -10,7 +10,7 @@ public class PlayerCrosshair : MonoBehaviour
     private PlayerGrapple m_grappleInfo;
     private Image m_crosshair;
     public Color m_grapplePossibleColour, grappleNotPossibleColour;
-    
+
     public void Initialise()
     {
         m_player = FindObjectOfType<PlayerController>();
@@ -27,10 +27,12 @@ public class PlayerCrosshair : MonoBehaviour
         {
             //change crosshair colour
             m_crosshair.color = m_grapplePossibleColour;
+            m_crosshair.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(m_crosshair.transform.rotation.eulerAngles.z, 0, 6 * Time.deltaTime)));
         }
         else
         {
             m_crosshair.color = grappleNotPossibleColour;
+            m_crosshair.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(m_crosshair.transform.rotation.eulerAngles.z, 45, 6 * Time.deltaTime)));
         }
     }
 }

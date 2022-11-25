@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
 
     //private variables
     private bool m_isRespawning = false;
+    private float m_cameraOffsetx;
     private enum GroundedState
     {
         grounded,
@@ -90,11 +91,12 @@ public class PlayerController : MonoBehaviour
     {
         //set reference to camera
         m_cameraDolly = m_camera.GetComponent<CameraDolly>();
+        m_cameraOffsetx = m_cameraDolly.m_cameraTarget.localPosition.x;
         m_animator = GetComponent<Animator>();
 
         //set values from to apply to grapples here... do it...
         UpdateGrappleHookFunction(m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_grappleCooldown, m_hookRigidness, m_hookPullSlow,
-            m_massScale, m_grappleableObjects, m_initialPull, m_leftHookOrigin, m_rightHookOrigin);
+            m_massScale, m_grappleableObjects, m_initialPull, m_leftHookOrigin, m_rightHookOrigin, m_grappleHit);
         UpdateGrappleHookVisual(m_ropeQuality, m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight, m_affectCurve, m_chainMaterial);
         DisableForSeconds(3);
         m_leftArmTargetOriginalPos = m_leftArmTarget.localPosition;
@@ -218,7 +220,7 @@ public class PlayerController : MonoBehaviour
         {
             m_wrongWayObject.SetActive(false);
         }
-    }
+    }    
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -278,7 +280,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector2 input = m_playerInput.actions["Look"].ReadValue<Vector2>();
-            input.Normalize();
             m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
             m_cameraDolly.MoveCamera(new Vector2(-input.y, input.x));
         }
@@ -286,7 +287,7 @@ public class PlayerController : MonoBehaviour
 
     //TODO these can be made to use a struct holding all information for grapplehooks
     public void UpdateGrappleHookFunction(float maxRopeDistance, float minRopeDistance, float hookSpeed, float grappleCooldown, float hookRigidness, float hookPullSlow,
-        float massScale, LayerMask grappleableObjects, float initialPull, Transform leftHookOrigin, Transform rightHookOrigin)
+        float massScale, LayerMask grappleableObjects, float initialPull, Transform leftHookOrigin, Transform rightHookOrigin, VFX hookHitFX)
     {
         m_leftGrapple.m_maxRopeDistance = m_rightGrapple.m_maxRopeDistance = maxRopeDistance;
         m_leftGrapple.m_minRopeDistance = m_rightGrapple.m_minRopeDistance = minRopeDistance;
@@ -299,6 +300,7 @@ public class PlayerController : MonoBehaviour
         m_leftGrapple.m_initialPull = m_rightGrapple.m_initialPull = initialPull;
         m_leftGrapple.m_player = m_rightGrapple.m_player = transform;
         m_leftGrapple.m_camera = m_rightGrapple.m_camera = m_camera;
+        m_rightGrapple.m_hookHitFX = m_leftGrapple.m_hookHitFX = hookHitFX;
         m_leftGrapple.m_hookOrigin = leftHookOrigin;
         m_rightGrapple.m_hookOrigin = rightHookOrigin;
     }
@@ -373,6 +375,8 @@ public class PlayerController : MonoBehaviour
             m_grappleLaunch.Spawn(transform);
             yield return new WaitForSeconds(0.1f);
             SelectRandomSound(m_gruntSounds).Spawn(transform);
+            m_wind.Spawn(transform, (m_rigidBody.velocity.magnitude / 15f), Mathf.Clamp(m_rigidBody.velocity.magnitude / 50f, 0, 1));
+            Debug.Log("Wind played with a Volume: " + m_rigidBody.velocity.magnitude / 100f + " Pitch: " + (m_rigidBody.velocity.magnitude / 15f));
             m_lastSoundPlayed = 0f;
         }
     }
