@@ -452,6 +452,7 @@ MonoBehaviour:
   m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!114 &241867781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,12 +511,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelLoader: {fileID: 1408809027}
-  m_deselectedFontSize: 40
-  m_mainMenu: {fileID: 0}
+  m_input: {fileID: 0}
+  m_mainMenu: {fileID: 241867775}
   m_optionsMenu: {fileID: 0}
   m_controlsMenu: {fileID: 0}
   m_creditsMenu: {fileID: 0}
-  m_mainMenuDefaultButton: {fileID: 0}
+  m_mainMenuDefaultButton: {fileID: 1932654696}
   m_optionsDefaultButton: {fileID: 0}
   m_controlsDefaultButton: {fileID: 0}
   m_creditsDefaultButton: {fileID: 0}
@@ -835,21 +836,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 241867783}
         m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
-        m_MethodName: LoadLevel
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1457,21 +1446,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 241867783}
         m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
-        m_MethodName: LoadLevel
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

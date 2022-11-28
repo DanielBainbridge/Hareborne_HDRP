@@ -73,7 +73,6 @@ public class Checkpoint : MonoBehaviour
             }
             m_parentSystem.m_checkpoints[siblingIndex + 1].gameObject.GetComponent<Collider>().enabled = true;
             m_parentSystem.m_player.m_nextCheckpoint = m_parentSystem.m_checkpoints[siblingIndex + 1].transform;
-            Debug.Log("Current Next Checkpoint: " + m_parentSystem.m_checkpoints[siblingIndex + 1].gameObject.name);
 
             //TODO Retain the time between Scene Transitions
         }
