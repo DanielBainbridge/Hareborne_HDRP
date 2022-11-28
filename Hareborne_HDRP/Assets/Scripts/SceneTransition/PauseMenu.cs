@@ -7,25 +7,22 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-
-    public InputActionMap _playerInput;
+    private PlayerInput m_playerInput;
     public InputAction _menu;
     public GameObject _crosshair;
-    public GameObject _countDown;
+    public GameObject m_wrongWay;
 
-    [SerializeField] GameObject _pauseUI;
+    [SerializeField] GameObject _pauseUI; 
     public bool _ispaused = false;
 
-    public Canvas[] _canvases;
-
     public GameObject optionsMenu, controlsMenu;
-    public bool openControlsMenu, openOptionsMenu;
+    public bool openControlsMenu;
     
 
     // Start is called before the first frame update
-    void start()
+    void Start()
     {
-        _canvases = FindObjectsOfType<Canvas>();
+        m_playerInput = FindObjectOfType<MenuUI>().m_input;
     }
 
     void OnEnable()
@@ -46,15 +43,11 @@ public class PauseMenu : MonoBehaviour
 
         if (_ispaused == true)
         {
-            _crosshair.SetActive(false);
-            //_countDown.SetActive(false);
             ActivateMenu();
         }
 
         else
         {
-            _crosshair.SetActive(true);
-            //_countDown.SetActive(true);
             DeActivateMenu();
         }
     }
@@ -68,15 +61,19 @@ public class PauseMenu : MonoBehaviour
         _pauseUI.SetActive(false);
         optionsMenu.SetActive(false);
         _ispaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        m_playerInput.SwitchCurrentActionMap("PlayerControls");
     }
 
     private void ActivateMenu()
     {
+        _crosshair.SetActive(false);
+        m_wrongWay.SetActive(false);
         Time.timeScale = 0;
         AudioListener.pause = true;
         _pauseUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
-        Debug.Log(Cursor.lockState);
+        m_playerInput.SwitchCurrentActionMap("UIControls");
     }
 
     public void OpenMenu()
@@ -110,5 +107,10 @@ public class PauseMenu : MonoBehaviour
         Destroy(this.gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
+    }
+    public void RespawnPlayer()
+    {
+        FindObjectOfType<PlayerController>().RespawnCharacter();
+        DeActivateMenu();
     }
 }

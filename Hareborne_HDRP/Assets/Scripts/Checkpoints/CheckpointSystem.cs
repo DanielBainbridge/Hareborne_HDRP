@@ -177,6 +177,7 @@ public class CheckpointSystem : MonoBehaviour
         m_timer.StopTimer();
         m_timer.m_totalTime = m_timer.GetCurrentTime();
         //loads end win screen
+        FindObjectOfType<MenuUI>().m_input.enabled = false;
         m_levelLoader.LoadScene(1);
         FindObjectOfType<PlayerCrosshair>().gameObject.SetActive(false);
         yield return new WaitForSeconds(1);

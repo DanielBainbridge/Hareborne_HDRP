@@ -20,8 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private InputActionAsset m_playerControls;
     private InputAction m_leftFire, m_rightFire, m_cameraMovement;
-    [SerializeField] UnityEngine.InputSystem.PlayerInput m_playerInput;
-    public PauseMenu _pauseMenu;
+    private PlayerInput m_playerInput;
+    private bool m_inputActive;
+    public PauseMenu m_pauseMenu;
 
     [Header("Grapple Hook Functional Variables")]
     public LayerMask m_grappleableObjects;
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
     [Header("Wrong Way")]
     [SerializeField]
     private GameObject m_wrongWayObject;
+    private bool m_wrongWayToggle = false;
 
 
     //Lists of sounds will choose random sound from list when played. Individual will play one sound.
@@ -71,7 +73,6 @@ public class PlayerController : MonoBehaviour
 
     //private variables
     private bool m_isRespawning = false;
-    private float m_cameraOffsetx;
     private enum GroundedState
     {
         grounded,
@@ -85,20 +86,20 @@ public class PlayerController : MonoBehaviour
         m_playerInput.actions["LeftFire"].canceled -= StopLeftHook;
         m_playerInput.actions["RightFire"].performed -= FireRightHook;
         m_playerInput.actions["RightFire"].canceled -= StopRightHook;
-        m_playerControls.Disable();
+        m_playerInput.DeactivateInput();
     }
     public void Initialise()
     {
         //set reference to camera
         m_cameraDolly = m_camera.GetComponent<CameraDolly>();
-        m_cameraOffsetx = m_cameraDolly.m_cameraTarget.localPosition.x;
         m_animator = GetComponent<Animator>();
+        m_playerInput = FindObjectOfType<MenuUI>().m_input;
 
         //set values from to apply to grapples here... do it...
         UpdateGrappleHookFunction(m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_grappleCooldown, m_hookRigidness, m_hookPullSlow,
             m_massScale, m_grappleableObjects, m_initialPull, m_leftHookOrigin, m_rightHookOrigin, m_grappleHit);
         UpdateGrappleHookVisual(m_ropeQuality, m_damper, m_strength, m_velocity, m_waveCount, m_waveHeight, m_affectCurve, m_chainMaterial);
-        DisableForSeconds(3);
+        StartCoroutine(DisableForSeconds(3));
         m_leftArmTargetOriginalPos = m_leftArmTarget.localPosition;
         m_rightArmTargetOriginalPos = m_rightArmTarget.localPosition;
         m_currentState = GroundedState.grounded;
@@ -112,6 +113,7 @@ public class PlayerController : MonoBehaviour
 
         // here we get get our ActionMap
         var gameplayActionMap = m_playerControls.FindActionMap("PlayerControls");
+        m_playerInput.currentActionMap = gameplayActionMap;
 
         // here we find actions on this action map and assign them to our individual actions
         m_playerInput.actions["LeftFire"].performed += FireLeftHook;
@@ -119,6 +121,7 @@ public class PlayerController : MonoBehaviour
         m_playerInput.actions["RightFire"].performed += FireRightHook;
         m_playerInput.actions["RightFire"].canceled += StopRightHook;
         m_currentState = GroundedState.grounded;
+        Cursor.lockState = CursorLockMode.Locked;
 
 
     }
@@ -126,7 +129,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_pauseMenu._ispaused)
+        if (m_pauseMenu._ispaused || !m_inputActive)
         {
             return;
         }
@@ -196,7 +199,7 @@ public class PlayerController : MonoBehaviour
                 //TODO Change this to 0 when you get the new rig
                 m_leftArmTarget.localPosition = Vector3.Lerp(m_leftArmTarget.localPosition, m_leftArmTargetOriginalPos, 0.08f);
         }
-        if(m_lastSoundPlayed <= 1.4f)
+        if (m_lastSoundPlayed <= 1.4f)
         {
             m_lastSoundPlayed += Time.deltaTime;
         }
@@ -214,13 +217,27 @@ public class PlayerController : MonoBehaviour
         angleBetweenForwardAndDesired = Mathf.Clamp(angleBetweenForwardAndDesired, -1.0f, 1.0f);
         if (angleBetweenForwardAndDesired < 0)
         {
-            m_wrongWayObject.SetActive(true);
+            if (!m_wrongWayToggle)
+            {
+                m_wrongWayObject.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(m_wrongWayObject.GetComponent<CanvasGroup>().alpha, 1, 8 * Time.deltaTime);
+                if (m_wrongWayObject.GetComponent<CanvasGroup>().alpha > 0.99f)
+                    m_wrongWayToggle = true;
+            }
+            else
+            {
+                m_wrongWayObject.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(m_wrongWayObject.GetComponent<CanvasGroup>().alpha, 0, 6 * Time.deltaTime);
+                if (m_wrongWayObject.GetComponent<CanvasGroup>().alpha < 0.01f)
+                    m_wrongWayToggle = false;
+            }
         }
         else
         {
-            m_wrongWayObject.SetActive(false);
+            if (m_wrongWayObject.GetComponent<CanvasGroup>().alpha > 0)
+            {
+                m_wrongWayObject.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(m_wrongWayObject.GetComponent<CanvasGroup>().alpha, 0, 6 * Time.deltaTime);
+            }
         }
-    }    
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -273,7 +290,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_pauseMenu._ispaused)
+        if (m_pauseMenu._ispaused || !m_inputActive)
         {
             return;
         }
@@ -322,30 +339,14 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator DisableForSeconds(int secondsToWait)
     {
-        m_playerControls.Disable();
-        m_leftFire.performed -= FireLeftHook;
-        m_leftFire.canceled -= StopLeftHook;
-        m_rightFire.performed -= FireRightHook;
-        m_rightFire.canceled -= StopRightHook;
+        m_playerInput.DeactivateInput();
+        m_inputActive = false;
 
         // wait for the amount of seconds at the beginning of the game
         yield return new WaitForSeconds(secondsToWait);
 
-        m_playerControls.Enable();
-
-        // here we get get our ActionMap
-        var gameplayActionMap = m_playerControls.FindActionMap("PlayerControls");
-
-        // here we find actions on this action map and assign them to our individual actions
-        m_leftFire = gameplayActionMap.FindAction("LeftFire");
-        m_rightFire = gameplayActionMap.FindAction("RightFire");
-        m_cameraMovement = gameplayActionMap.FindAction("Look");
-
-        // here we set listeners for the new input system to perform functions when an action is performed or cancelled
-        m_leftFire.performed += FireLeftHook;
-        m_leftFire.canceled += StopLeftHook;
-        m_rightFire.performed += FireRightHook;
-        m_rightFire.canceled += StopRightHook;
+        m_inputActive = true;
+        m_playerInput.ActivateInput();
     }
     private IEnumerator RespawnDelay()
     {
@@ -370,7 +371,7 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator FireHookSound()
     {
-        if(m_lastSoundPlayed >= 1.4f)
+        if (m_lastSoundPlayed >= 1.4f)
         {
             m_grappleLaunch.Spawn(transform);
             yield return new WaitForSeconds(0.1f);

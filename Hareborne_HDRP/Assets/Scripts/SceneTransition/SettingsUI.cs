@@ -14,9 +14,19 @@ public class SettingsUI : MonoBehaviour
 
     public TMPro.TMP_Dropdown resolutionDropdown;
 
+    //ammended
+    [SerializeField] private Slider m_audioSlider;
+    [SerializeField] private Slider m_sensitivitySlider;
+
 
     void Start()
     {
+        //ammended
+        m_sensitivitySlider.value = PlayerPrefs.GetFloat("CamSpeed");
+        audioMixer.GetFloat("volume", out float volume);
+        m_audioSlider.value = volume;
+        //
+
         resolutions = Screen.resolutions;
 
         // clear out all the options
@@ -83,7 +93,7 @@ public class SettingsUI : MonoBehaviour
     public void SetCameraSensitivity(float sensitivity)
     {
         PlayerPrefs.SetFloat("CamSpeed", sensitivity);
-        if(FindObjectOfType<CameraDolly>())
+        if (FindObjectOfType<CameraDolly>())
             FindObjectOfType<CameraDolly>().SetCameraSensitivity();
     }
 }
