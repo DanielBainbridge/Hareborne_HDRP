@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
     private GameObject m_wrongWayObject;
     private bool m_wrongWayToggle = false;
 
+    [Header("Speed Lines")]
+    [SerializeField] private GameObject m_speedLines;
+    private Renderer m_speedLineRender;
 
     //Lists of sounds will choose random sound from list when played. Individual will play one sound.
     [Header("Sounds:")]
@@ -94,6 +97,8 @@ public class PlayerController : MonoBehaviour
         m_cameraDolly = m_camera.GetComponent<CameraDolly>();
         m_animator = GetComponent<Animator>();
         m_playerInput = FindObjectOfType<MenuUI>().m_input;
+
+        m_speedLineRender = m_speedLines.GetComponent<Renderer>();
 
         //set values from to apply to grapples here... do it...
         UpdateGrappleHookFunction(m_maxRopeDistance, m_minRopeDistance, m_hookSpeed, m_grappleCooldown, m_hookRigidness, m_hookPullSlow,
@@ -238,6 +243,12 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    private void FixedUpdate()
+    {
+        Color newColor = m_speedLineRender.material.color;
+        newColor.a = Mathf.Clamp((m_rigidBody.velocity.magnitude / 2 - 10) / m_maxSpeed, 0, 1);
+        m_speedLineRender.material.color = newColor;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -377,7 +388,6 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             SelectRandomSound(m_gruntSounds).Spawn(transform);
             m_wind.Spawn(transform, (m_rigidBody.velocity.magnitude / 15f), Mathf.Clamp(m_rigidBody.velocity.magnitude / 50f, 0, 1));
-            Debug.Log("Wind played with a Volume: " + m_rigidBody.velocity.magnitude / 100f + " Pitch: " + (m_rigidBody.velocity.magnitude / 15f));
             m_lastSoundPlayed = 0f;
         }
     }
