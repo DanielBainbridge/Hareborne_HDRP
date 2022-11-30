@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1200201626442094105}
   - component: {fileID: 1158002313533640547}
   - component: {fileID: 3170659342207006680}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ledge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,8 @@ GameObject:
   - component: {fileID: 4205871096335650758}
   - component: {fileID: 7155064544670740750}
   - component: {fileID: 3884771544210753467}
-  m_Layer: 0
+  - component: {fileID: 6687844110753644128}
+  m_Layer: 6
   m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,6 +163,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6687844110753644128
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105880908437400237}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.40350708, y: 0.3902874, z: 1.2758173}
+  m_Center: {x: -0.20188102, y: 0.17694946, z: 0.63811314}
 --- !u!1 &2984930218559448119
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +187,7 @@ GameObject:
   - component: {fileID: 7330194211869512538}
   - component: {fileID: 5103737076808057920}
   - component: {fileID: 6342883346868336381}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ledge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +268,7 @@ GameObject:
   - component: {fileID: 3377012148036467037}
   - component: {fileID: 329416788866264106}
   - component: {fileID: 4108994941886574029}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +349,7 @@ GameObject:
   - component: {fileID: 7167341816488216847}
   - component: {fileID: 704028812358821200}
   - component: {fileID: 8109269487480364888}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +428,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7628137881254287558}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building-Prefab-003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7842826414977155185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building-Prefab-003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +497,7 @@ GameObject:
   - component: {fileID: 6804916125580475467}
   - component: {fileID: 8289648854510354259}
   - component: {fileID: 6073003368627221956}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
