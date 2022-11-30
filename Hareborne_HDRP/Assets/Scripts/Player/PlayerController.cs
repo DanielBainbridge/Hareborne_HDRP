@@ -242,6 +242,7 @@ public class PlayerController : MonoBehaviour
                 m_wrongWayObject.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(m_wrongWayObject.GetComponent<CanvasGroup>().alpha, 0, 6 * Time.deltaTime);
             }
         }
+        Debug.Log("Grappling Value: " + m_animator.GetFloat("Grappling") + " Still value: " + m_animator.GetFloat("Still"));
     }
     private void FixedUpdate()
     {
