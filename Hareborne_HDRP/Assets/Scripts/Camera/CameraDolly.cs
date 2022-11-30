@@ -54,6 +54,7 @@ public class CameraDolly : MonoBehaviour
         m_camera.fieldOfView = m_cameraPOV;
 
         SetCameraSensitivity();
+        SetLookRotation(m_cameraTarget.transform.parent.rotation);
     }
 
     private void LateUpdate()
