@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2586832391988878572}
   - component: {fileID: 4973207573512772771}
   - component: {fileID: 5496526656602734407}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Windows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,8 @@ GameObject:
   - component: {fileID: 689786674611974839}
   - component: {fileID: 5392797752486559847}
   - component: {fileID: 6024097757889018608}
-  m_Layer: 0
+  - component: {fileID: 5282921692955550639}
+  m_Layer: 6
   m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,6 +164,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5282921692955550639
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460298799753999984}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 21.530115, y: 103.86765, z: 22.326088}
+  m_Center: {x: -10.289062, y: 51.933826, z: -9.246746}
 --- !u!1 &8552269451213447896
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3389078935457311175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building-Prefab-001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

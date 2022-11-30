@@ -125,6 +125,7 @@ public class MenuUI : MonoBehaviour
 
     public void LoadLevel(int sceneIndex)
     {
+        m_input.DeactivateInput();
         Destroy(this.gameObject);
         m_levelLoader.LoadScene(sceneIndex);
         Time.timeScale = 1;
@@ -146,7 +147,7 @@ public class MenuUI : MonoBehaviour
     {
         if (m_input)
         {
-            if (m_input.currentControlScheme != m_currentControlScheme)
+            if (m_input.currentControlScheme != m_currentControlScheme && m_input.inputIsActive)
             {
                 m_currentControlScheme = m_input.currentControlScheme;
                 if (m_currentControlScheme == "Gamepad")

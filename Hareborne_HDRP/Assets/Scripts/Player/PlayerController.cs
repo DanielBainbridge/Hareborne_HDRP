@@ -83,14 +83,6 @@ public class PlayerController : MonoBehaviour
     }
     GroundedState m_currentState;
 
-    private void OnDisable()
-    {
-        m_playerInput.actions["LeftFire"].performed -= FireLeftHook;
-        m_playerInput.actions["LeftFire"].canceled -= StopLeftHook;
-        m_playerInput.actions["RightFire"].performed -= FireRightHook;
-        m_playerInput.actions["RightFire"].canceled -= StopRightHook;
-        m_playerInput.DeactivateInput();
-    }
     public void Initialise()
     {
         //set reference to camera
@@ -242,6 +234,7 @@ public class PlayerController : MonoBehaviour
                 m_wrongWayObject.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(m_wrongWayObject.GetComponent<CanvasGroup>().alpha, 0, 6 * Time.deltaTime);
             }
         }
+        Debug.Log("Grappling Value: " + m_animator.GetFloat("Grappling") + " Still value: " + m_animator.GetFloat("Still"));
     }
     private void FixedUpdate()
     {
@@ -358,6 +351,11 @@ public class PlayerController : MonoBehaviour
 
         m_inputActive = true;
         m_playerInput.ActivateInput();
+    }
+    public void DeactivatePlayer()
+    {
+        m_playerInput.DeactivateInput();
+        m_inputActive = false;
     }
     private IEnumerator RespawnDelay()
     {
