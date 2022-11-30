@@ -47,6 +47,7 @@ public class CheckpointSystem : MonoBehaviour
 
     public void LevelFinished()
     {
+        m_player.DeactivatePlayer();
         StartCoroutine(LevelEnd());
     }
 
@@ -182,6 +183,5 @@ public class CheckpointSystem : MonoBehaviour
         FindObjectOfType<PlayerCrosshair>().gameObject.SetActive(false);
         yield return new WaitForSeconds(1);
         Cursor.lockState = CursorLockMode.None;
-
     }
 }
