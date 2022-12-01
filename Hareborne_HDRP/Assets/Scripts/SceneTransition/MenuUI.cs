@@ -127,6 +127,10 @@ public class MenuUI : MonoBehaviour
     {
         m_input.DeactivateInput();
         Destroy(this.gameObject);
+        if (FindObjectOfType<PauseMenu>())
+        {
+            Destroy(FindObjectOfType<PauseMenu>().gameObject);
+        }
         m_levelLoader.LoadScene(sceneIndex);
         Time.timeScale = 1;
     }
