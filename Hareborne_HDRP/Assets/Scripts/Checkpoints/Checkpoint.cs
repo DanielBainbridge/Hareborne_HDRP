@@ -26,7 +26,8 @@ public class Checkpoint : MonoBehaviour
         m_checkpointReachedParticle = GetComponentsInChildren<ParticleSystem>();
         foreach (ParticleSystem pS in m_checkpointReachedParticle)
         {
-            pS.Pause();
+            if (m_parentSystem.m_checkpoints[0].gameObject != gameObject)
+                pS.Pause();
         }
     }
     /// <summary>
@@ -41,17 +42,13 @@ public class Checkpoint : MonoBehaviour
         {
             //set respawn and collects current time
             m_parentSystem.m_player.SetRespawn(transform.position, transform.rotation);
-            
+
             m_RecordedTime = m_timer.GetCurrentTime();
-            if(m_parentSystem.m_currentTriggeredCheckpoint != 0)
+            if (m_parentSystem.m_currentTriggeredCheckpoint != 0)
                 m_timer.AddCheckpointTimeToUI();
             if (m_checkpointSound)
             {
                 m_checkpointSound.Play();
-            }
-            foreach (ParticleSystem pS in m_checkpointReachedParticle)
-            {
-                pS.Play();
             }
 
             int siblingIndex = transform.GetSiblingIndex();
@@ -74,7 +71,11 @@ public class Checkpoint : MonoBehaviour
             m_parentSystem.m_checkpoints[siblingIndex + 1].gameObject.GetComponent<Collider>().enabled = true;
             m_parentSystem.m_player.m_nextCheckpoint = m_parentSystem.m_checkpoints[siblingIndex + 1].transform;
 
-            //TODO Retain the time between Scene Transitions
+            foreach (ParticleSystem pS in m_parentSystem.m_checkpoints[siblingIndex + 1].m_checkpointReachedParticle)
+            {
+                pS.Play();
+            }
+            gameObject.GetComponentInChildren<MeshRenderer>().gameObject.SetActive(false);
         }
     }
 }
