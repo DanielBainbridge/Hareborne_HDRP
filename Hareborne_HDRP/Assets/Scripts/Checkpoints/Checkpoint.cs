@@ -19,7 +19,7 @@ public class Checkpoint : MonoBehaviour
     /// <summary>
     /// Get the parent system for references to the player in the scene
     /// </summary>
-    private void Start()
+    public void Initialise()
     {
         m_parentSystem = GetComponentInParent<CheckpointSystem>();
         m_timer = m_parentSystem.m_timer;

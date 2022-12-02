@@ -9,6 +9,7 @@ public class SettingsUI : MonoBehaviour
 {
     public AudioMixer audioMixer;
     Resolution[] resolutions;
+    public AudioSource m_testSound;
 
     private bool isSetYet = false;
 
@@ -76,6 +77,8 @@ public class SettingsUI : MonoBehaviour
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);
+        m_testSound.ignoreListenerPause = true;
+        m_testSound.Play();
     }
 
     // This is a function that we use to change the quality of resolution in game using the drop down UI. 
@@ -94,6 +97,6 @@ public class SettingsUI : MonoBehaviour
     {
         PlayerPrefs.SetFloat("CamSpeed", sensitivity);
         if (FindObjectOfType<CameraDolly>())
-            FindObjectOfType<CameraDolly>().SetCameraSensitivity();
+            FindObjectOfType<CameraDolly>().SetCameraSensitivity();        
     }
 }

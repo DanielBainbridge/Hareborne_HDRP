@@ -34,6 +34,7 @@ public class CheckpointSystem : MonoBehaviour
             {
                 Checkpoint checkpointToAdd = transform.GetChild(i).GetComponent<Checkpoint>();
                 m_checkpoints.Add(checkpointToAdd);
+                checkpointToAdd.Initialise();
                 checkpointToAdd.m_triggered = false;
                 checkpointToAdd.GetComponent<Collider>().enabled = false;
             }
