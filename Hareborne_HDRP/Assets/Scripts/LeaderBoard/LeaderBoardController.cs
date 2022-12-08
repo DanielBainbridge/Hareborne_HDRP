@@ -55,7 +55,7 @@ IEnumerator SetupRoutine()
                         done = true;
                     }
                 });
-                yield return new WaitWhile(() => done = false);
+                yield return new WaitWhile(() => done == false);
     }
 
     IEnumerator GetPlayerFiles()
@@ -72,7 +72,7 @@ IEnumerator SetupRoutine()
                 Debug.Log("Error retrieving player storage");
             }
         });
-        yield return new WaitWhile(() => done = false);
+        yield return new WaitWhile(() => done == false);
         }
         
     
