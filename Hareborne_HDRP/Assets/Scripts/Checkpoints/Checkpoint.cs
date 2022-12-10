@@ -75,7 +75,8 @@ public class Checkpoint : MonoBehaviour
             {
                 pS.Play();
             }
-            gameObject.GetComponentInChildren<MeshRenderer>().gameObject.SetActive(false);
+            if (siblingIndex != 0)
+                gameObject.GetComponentInChildren<MeshRenderer>().gameObject.SetActive(false);
         }
     }
 }

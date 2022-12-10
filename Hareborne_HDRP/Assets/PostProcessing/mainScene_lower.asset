@@ -297,7 +297,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.523
+    m_Value: 0.612
     min: 0
     max: 1
   smoothness:
@@ -555,13 +555,13 @@ MonoBehaviour:
     min: 0
   baseHeight:
     m_OverrideState: 1
-    m_Value: 19.7
+    m_Value: 45
   maximumHeight:
     m_OverrideState: 1
     m_Value: 463.89
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 56.34
+    m_Value: 30
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1

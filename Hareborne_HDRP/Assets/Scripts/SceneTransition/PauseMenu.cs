@@ -104,7 +104,9 @@ public class PauseMenu : MonoBehaviour
 
     public void ResetLevel()
     {
+        FindObjectOfType<PlayerController>().DeactivatePlayer();
         Destroy(this.gameObject);
+        AudioListener.pause = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
