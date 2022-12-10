@@ -20,6 +20,7 @@ public class CheckpointSystem : MonoBehaviour
     [HideInInspector]
     public int m_currentTriggeredCheckpoint = 0;
     public LevelLoader m_levelLoader;
+    public GameObject m_wrongWay;
     /// <summary>
     /// Set a reference to the player from within the scene
     /// </summary>
@@ -182,6 +183,7 @@ public class CheckpointSystem : MonoBehaviour
         FindObjectOfType<MenuUI>().m_input.enabled = false;
         m_levelLoader.LoadScene(1);
         FindObjectOfType<PlayerCrosshair>().gameObject.SetActive(false);
+        m_wrongWay.SetActive(false);
         yield return new WaitForSeconds(1);
         Cursor.lockState = CursorLockMode.None;
     }

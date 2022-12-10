@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private InputActionAsset m_playerControls;
     private InputAction m_leftFire, m_rightFire, m_cameraMovement;
     private PlayerInput m_playerInput;
-    private bool m_inputActive;
+    private bool m_inputActive = true;
     public PauseMenu m_pauseMenu;
 
     [Header("Grapple Hook Functional Variables")]
@@ -151,7 +151,6 @@ public class PlayerController : MonoBehaviour
                 m_currentState = GroundedState.grounded;
             else
                 m_currentState = GroundedState.inAir;
-            Debug.DrawLine(transform.position + transform.up, transform.position - transform.up * rayLength);
 
 
             // Updates blend tree + IK restraints on arms
@@ -342,18 +341,25 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator DisableForSeconds(int secondsToWait)
     {
-        m_playerInput.DeactivateInput();
-        m_inputActive = false;
+        DeactivatePlayer();
 
         // wait for the amount of seconds at the beginning of the game
         yield return new WaitForSeconds(secondsToWait);
 
         m_inputActive = true;
         m_playerInput.ActivateInput();
+        m_playerInput.actions["LeftFire"].performed += FireLeftHook;
+        m_playerInput.actions["LeftFire"].canceled += StopLeftHook;
+        m_playerInput.actions["RightFire"].performed += FireRightHook;
+        m_playerInput.actions["RightFire"].canceled += StopRightHook;
     }
     public void DeactivatePlayer()
     {
         m_playerInput.DeactivateInput();
+        m_playerInput.actions["LeftFire"].performed -= FireLeftHook;
+        m_playerInput.actions["LeftFire"].canceled -= StopLeftHook;
+        m_playerInput.actions["RightFire"].performed -= FireRightHook;
+        m_playerInput.actions["RightFire"].canceled -= StopRightHook;
         m_inputActive = false;
     }
     private IEnumerator RespawnDelay()
@@ -382,10 +388,10 @@ public class PlayerController : MonoBehaviour
         if (m_lastSoundPlayed >= 1.4f)
         {
             m_grappleLaunch.Spawn(transform);
+            m_lastSoundPlayed = 0f;
             yield return new WaitForSeconds(0.1f);
             SelectRandomSound(m_gruntSounds).Spawn(transform);
             m_wind.Spawn(transform, (m_rigidBody.velocity.magnitude / 15f), Mathf.Clamp(m_rigidBody.velocity.magnitude / 50f, 0, 1));
-            m_lastSoundPlayed = 0f;
         }
     }
 }

@@ -203,6 +203,7 @@ public class CameraDolly : MonoBehaviour
         }
 
         transform.SetPositionAndRotation(lookPosition, m_lookRotation);
+        m_orbitAngles = m_lookRotation.eulerAngles;
     }
     public void SetCameraSensitivity()
     {
